@@ -1,0 +1,31 @@
+{
+  "source": "https://hkl.org",
+  "checkedAt": "2026-11-12T10:34:28Z",
+  "expectedPages": 644,
+  "importedPages": 644,
+  "locales": {
+    "en": 92,
+    "de-DE": 92,
+    "es-BO": 92,
+    "it-IT": 92,
+    "pa-Guru-IN": 92,
+    "ru-RU": 92,
+    "uk-UA": 92
+  },
+  "englishPages": 92,
+  "stories": 18,
+  "weeklyPractices": 25,
+  "boardProfiles": 7,
+  "speakerProfiles": 12,
+  "conferencePages": 9,
+  "publicationIssues": 18,
+  "textBlocks": 15638,
+  "embeds": 1881,
+  "forms": 191,
+  "localImages": 408,
+  "missingPages": [],
+  "emptyPages": [],
+  "brokenInternalLinks": [],
+  "imageFallbacks": [],
+  "fetchFailures": []
+}

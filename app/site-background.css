@@ -1,0 +1,54 @@
+/* The selected HKL texture, shared by the homepage and all inner pages. */
+:root {
+  --site-background-image: url('/images/sage-geometric-background.webp');
+  --site-background-size: 768px 768px;
+}
+
+body {
+  background-color: #e6eee3;
+  background-image: var(--site-background-image);
+  background-size: var(--site-background-size);
+  background-position: center top;
+  background-repeat: repeat;
+}
+
+/* Open content areas reveal the textured page beneath their reading panels. */
+main > .section-pad:not(.practice),
+.soft-section,
+.reading-strip,
+.value-jump {
+  background: transparent;
+}
+
+.site-header {
+  background-color: #e6eee3;
+  background-image: var(--site-background-image);
+  background-size: var(--site-background-size);
+  background-position: center top;
+  background-repeat: repeat;
+}
+
+/* Gentle tinted bands keep the page rhythm while carrying the same texture. */
+.welcome,
+.quote,
+.newsletter {
+  background-color: #e6eee3;
+  background-image: linear-gradient(#dce6d440, #dce6d440), var(--site-background-image);
+  background-size: auto, var(--site-background-size);
+  background-position: center top;
+  background-repeat: repeat;
+}
+
+/* Reading and navigation panels stay opaque above the background pattern. */
+.mega-menu,
+.mobile-navigation,
+.nav-brand,
+.contact-form,
+.gathering-card,
+.community-paths article {
+  background-color: var(--paper);
+}
+
+@media (max-width: 760px) {
+  :root { --site-background-size: 560px 560px; }
+}
