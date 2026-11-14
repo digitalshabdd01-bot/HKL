@@ -73,6 +73,44 @@ class BackendTests(TestCase):
     def test_health(self):
         self.assertEqual(self.api.get("/health/").json(), {"status": "ok"})
 
+    def test_bootstrap_creates_first_admin_and_never_resets_it(self):
+        from io import StringIO
+        from unittest.mock import patch
+        from django.core.management import call_command
+        values = {"DJANGO_SUPERUSER_USERNAME": "initial-admin", "DJANGO_SUPERUSER_EMAIL": "admin@example.com", "DJANGO_SUPERUSER_PASSWORD": "Example-Only-Long-Password-7284"}
+        output = StringIO()
+        with patch.dict("os.environ", values):
+            call_command("bootstrap_admin", stdout=output)
+            admin = get_user_model().objects.get(username="initial-admin")
+            self.assertTrue(admin.is_staff and admin.is_superuser)
+            self.assertTrue(admin.check_password(values["DJANGO_SUPERUSER_PASSWORD"]))
+            original_hash = admin.password
+            call_command("bootstrap_admin", stdout=output)
+            admin.refresh_from_db()
+            self.assertEqual(admin.password, original_hash)
+            self.assertEqual(get_user_model().objects.count(), 1)
+        self.assertNotIn(values["DJANGO_SUPERUSER_PASSWORD"], output.getvalue())
+
+    def test_bootstrap_rejects_invalid_details_without_printing_them(self):
+        from unittest.mock import patch
+        from django.core.management import call_command, CommandError
+        values = {"DJANGO_SUPERUSER_USERNAME": "initial-admin", "DJANGO_SUPERUSER_EMAIL": "invalid-email", "DJANGO_SUPERUSER_PASSWORD": "short"}
+        with patch.dict("os.environ", values):
+            with self.assertRaises(CommandError) as error:
+                call_command("bootstrap_admin")
+        self.assertNotIn("invalid-email", str(error.exception))
+        self.assertEqual(get_user_model().objects.count(), 0)
+
+    def test_bootstrap_never_promotes_an_existing_username(self):
+        from unittest.mock import patch
+        from django.core.management import call_command, CommandError
+        user = get_user_model().objects.create_user(username="reserved")
+        with patch.dict("os.environ", {"DJANGO_SUPERUSER_USERNAME": "reserved", "DJANGO_SUPERUSER_EMAIL": "admin@example.com", "DJANGO_SUPERUSER_PASSWORD": "Example-Only-Long-Password-7284"}):
+            with self.assertRaises(CommandError):
+                call_command("bootstrap_admin")
+        user.refresh_from_db()
+        self.assertFalse(user.is_staff or user.is_superuser)
+
     def test_event_windows_and_types(self):
         now = timezone.now()
         past = Content.objects.create(kind="event", slug="past", title="Past conference", published=True, starts_at=now-timedelta(days=3), ends_at=now-timedelta(days=2))

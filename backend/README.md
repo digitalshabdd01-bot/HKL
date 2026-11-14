@@ -37,7 +37,7 @@ Submission JSON: `name`, `email`, `message`, `consent: true`; optional `location
 
 ## Render
 
-Create a **separate Python web service** from this repository, root directory `backend`. Build: `bash build.sh`. Start: `gunicorn config.wsgi:application --bind 0.0.0.0:$PORT --workers 2 --access-logfile -`. Alternatively use `backend/render.yaml` as a separate Blueprint. This does not provision or purchase a database.
+Create a **separate Python web service** from this repository and leave Root Directory blank. Build: `bash backend/build.sh`. Start: `gunicorn --chdir backend config.wsgi:application --bind 0.0.0.0:$PORT --workers 2 --access-logfile -`. Keeping the repository root makes the content catalogs available to import commands. Alternatively use `backend/render.yaml` as a separate Blueprint. This does not provision or purchase a database. See [DEPLOYMENT.md](DEPLOYMENT.md) for first-admin setup without shell access and activation steps.
 
 Set `DJANGO_SECRET_KEY` to a generated random value, `DJANGO_DEBUG=false`, `DATABASE_URL` to a persistent PostgreSQL database, `DJANGO_ALLOWED_HOSTS` to the backend hostname, `FRONTEND_ORIGINS` to the exact frontend HTTPS origin, and `CSRF_TRUSTED_ORIGINS` to the backend HTTPS origin. The Render hostname is automatically allowed. Never commit real credentials. Run `python manage.py check --deploy` with production settings before rollout.
 

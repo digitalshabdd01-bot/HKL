@@ -4,11 +4,17 @@ services:
     name: hkl-backend
     runtime: python
     plan: free
-    rootDir: backend
-    buildCommand: bash build.sh
-    startCommand: gunicorn config.wsgi:application --bind 0.0.0.0:$PORT --workers 2 --access-logfile -
+    # Keep repository content/ available to the import commands.
+    buildCommand: bash backend/build.sh
+    startCommand: gunicorn --chdir backend config.wsgi:application --bind 0.0.0.0:$PORT --workers 2 --access-logfile -
+    buildFilter:
+      paths:
+        - backend/**
+        - content/**
     healthCheckPath: /health/
     envVars:
+      - key: PYTHON_VERSION
+        value: "3.12.14"
       - key: DJANGO_SECRET_KEY
         generateValue: true
       - key: DJANGO_DEBUG
