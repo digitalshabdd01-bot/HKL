@@ -1,3 +1,5 @@
+import ManagedCollection from "./ManagedCollection";
+import { backendEnabled } from "../lib/hkl-api";
 import { ArrowUpRight, Footprints, Globe2, Heart, Leaf, Mail, MapPin, Sprout, Users } from "lucide-react";
 import { ArrowLink, JourneyCTA, PageHero, PageShell } from "./PageShell";
 import { ContactComposer, GatheringList, ReflectionMinute, TalksLibrary } from "./InnerInteractions";
@@ -27,7 +29,7 @@ export function StoriesPage() {
 }
 
 export function GatheringsPage() {
-  return <PageShell><PageHero eyebrow="CONFERENCES & GATHERINGS" title="Come as you are." emphasis="Grow together." description="Find a shared moment of reflection and connection with the HKL community." image="amritsar.webp" alt="A large audience at an HKL conference in Amritsar"/><section className="section-pad"><div className="container"><GatheringList/></div></section><ConferenceArchive/><section className="soft-section section-pad"><div className="container photo-editorial"><img src="/images/walks.webp" alt="An HKL Walk bringing the movement into a local community" loading="lazy"/><div><span className="eyebrow">CONNECTION, CLOSER TO HOME</span><h2>One walk.<br/><em>One shared intention.</em></h2><p>HKL Walks bring people together in their own communities. Find a walk, check the meeting point, and join the next step.</p><ArrowLink href="/walks">Find an HKL Walk</ArrowLink></div></div></section><JourneyCTA/></PageShell>;
+  return <PageShell><PageHero eyebrow="CONFERENCES & GATHERINGS" title="Come as you are." emphasis="Grow together." description="Find a shared moment of reflection and connection with the HKL community." image="amritsar.webp" alt="A large audience at an HKL conference in Amritsar"/><section className="section-pad"><div className="container">{backendEnabled ? <ManagedCollection kind="event" eventWindow="upcoming"/> : <GatheringList/>}</div></section><ConferenceArchive/><section className="soft-section section-pad"><div className="container photo-editorial"><img src="/images/walks.webp" alt="An HKL Walk bringing the movement into a local community" loading="lazy"/><div><span className="eyebrow">CONNECTION, CLOSER TO HOME</span><h2>One walk.<br/><em>One shared intention.</em></h2><p>HKL Walks bring people together in their own communities. Find a walk, check the meeting point, and join the next step.</p><ArrowLink href="/walks">Find an HKL Walk</ArrowLink></div></div></section><JourneyCTA/></PageShell>;
 }
 
 export function CommunityPage() {
@@ -35,11 +37,11 @@ export function CommunityPage() {
 }
 
 export function WalksPage() {
- return <PageShell><PageHero eyebrow="HKL WALKS" title="A shared message." emphasis="A step together." description="Bring Humility, Kindness & Love into the heart of your community." image="walks.webp" alt="People walking together with the message of Humility, Kindness & Love"/><div id="walk-calendar"/><SourceSection path="/walks"/><JourneyCTA/></PageShell>;
+ return <PageShell><PageHero eyebrow="HKL WALKS" title="A shared message." emphasis="A step together." description="Bring Humility, Kindness & Love into the heart of your community." image="walks.webp" alt="People walking together with the message of Humility, Kindness & Love"/><div id="walk-calendar"/>{backendEnabled ? <section className="section-pad container"><ManagedCollection kind="event" eventType="walk" eventWindow="upcoming"/></section> : <SourceSection path="/walks"/>}<JourneyCTA/></PageShell>;
 }
 
 export function PublicationPage() {
- return <PageShell><PageHero eyebrow="THE HKL TIME" title="Goodness, from" emphasis="around the world." description="A fortnightly publication celebrating the people and everyday efforts of the HKL movement." image="parma.webp" alt="The HKL community coming together in Parma, Italy"/><SourceSection path="/the-hkl-time"/><JourneyCTA/></PageShell>;
+ return <PageShell><PageHero eyebrow="THE HKL TIME" title="Goodness, from" emphasis="around the world." description="A fortnightly publication celebrating the people and everyday efforts of the HKL movement." image="parma.webp" alt="The HKL community coming together in Parma, Italy"/>{backendEnabled ? <section className="section-pad container"><ManagedCollection kind="publication"/></section> : <SourceSection path="/the-hkl-time"/>}<JourneyCTA/></PageShell>;
 }
 
 export function VolunteerPage() {

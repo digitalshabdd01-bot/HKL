@@ -1,3 +1,5 @@
+import ManagedCollection from "./ManagedCollection";
+import { backendEnabled } from "../lib/hkl-api";
 import { ArrowUpRight, ChevronRight } from "lucide-react";
 import { JourneyCTA, PageHero, PageShell } from "./PageShell";
 import { SourceBlocks } from "./SourceContent";
@@ -9,6 +11,7 @@ export function AllResourcesPage() {
 }
 
 export function PeopleDirectory({ boardOnly=false }: { boardOnly?: boolean }) {
+  if (backendEnabled) return <ManagedCollection kind="speaker" boardOnly={boardOnly}/>;
   const people=profileSummaries.filter(p=>!boardOnly || p.path.startsWith("/board-of-directors/"));
   const board=getSourcePage("/board-of-directors");
   return <div className="people-grid">{people.map(person=>{
@@ -24,7 +27,7 @@ export function SpeakersPage() {
 }
 
 export function ConferenceArchive() {
-  return <section className="section-pad conference-archive" id="conference-archive"><div className="container"><div className="section-heading"><div><span className="eyebrow">THE HKL JOURNEY AROUND THE WORLD</span><h2>Conferences.<br/><em>Connections that continue.</em></h2></div><a className="text-link" href="/speakers">Meet the speakers <ArrowUpRight size={17}/></a></div><div className="conference-grid">{conferenceSummaries.map(c=><a className="conference-card" key={c.path} href={c.path}>{c.image ? <img src={sourceImage(c.image)} alt={c.title} loading="lazy"/> : <div className="conference-symbol" aria-hidden="true">✷</div>}<div><span className="eyebrow">INTERNATIONAL HKL CONFERENCE</span><h3>{c.title}</h3><p>{c.description}</p><span className="resource-open">Explore the conference <ArrowUpRight size={17}/></span></div></a>)}</div></div></section>;
+  return <section className="section-pad conference-archive" id="conference-archive"><div className="container"><div className="section-heading"><div><span className="eyebrow">THE HKL JOURNEY AROUND THE WORLD</span><h2>Conferences.<br/><em>Connections that continue.</em></h2></div><a className="text-link" href="/speakers">Meet the speakers <ArrowUpRight size={17}/></a></div>{backendEnabled ? <ManagedCollection kind="event" eventWindow="past"/> : <div className="conference-grid">{conferenceSummaries.map(c=><a className="conference-card" key={c.path} href={c.path}>{c.image ? <img src={sourceImage(c.image)} alt={c.title} loading="lazy"/> : <div className="conference-symbol" aria-hidden="true">✷</div>}<div><span className="eyebrow">INTERNATIONAL HKL CONFERENCE</span><h3>{c.title}</h3><p>{c.description}</p><span className="resource-open">Explore the conference <ArrowUpRight size={17}/></span></div></a>)}</div>}</div></section>;
 }
 
 export function FullMovementPage({ page }: { page: SourcePage }) {

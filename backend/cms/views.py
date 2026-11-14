@@ -4,8 +4,10 @@ from django.utils import timezone
 from rest_framework import generics, permissions, filters, status
 from rest_framework.response import Response
 from rest_framework.throttling import AnonRateThrottle
-from .models import Content, Submission
-from .serializers import ContentSerializer, SubmissionSerializer
+from .models import Content, Submission, SiteSettings
+from .serializers import ContentSerializer, SubmissionSerializer, SiteSettingsSerializer
+from django.db.models import Q
+from django.shortcuts import get_object_or_404
 
 def health(request):
     try:
@@ -28,6 +30,14 @@ class PublicContent:
         kind = self.request.query_params.get("kind")
         if kind:
             qs = qs.filter(kind=kind)
+        for field in ["event_type", "profile_role"]:
+            if self.request.query_params.get(field):
+                qs = qs.filter(**{field: self.request.query_params[field]})
+        window = self.request.query_params.get("event_window")
+        if window == "upcoming":
+            qs = qs.filter(Q(ends_at__gte=timezone.now()) | Q(ends_at__isnull=True, starts_at__gte=timezone.now()))
+        elif window == "past":
+            qs = qs.filter(Q(ends_at__lt=timezone.now()) | Q(ends_at__isnull=True, starts_at__lt=timezone.now()))
         if self.request.query_params.get("featured") == "true":
             qs = qs.filter(featured=True)
         return qs
@@ -37,6 +47,12 @@ class ContentList(PublicContent, generics.ListAPIView):
 
 class ContentDetail(PublicContent, generics.RetrieveAPIView):
     lookup_field = "pk"
+
+class PublicSettings(generics.RetrieveAPIView):
+    serializer_class = SiteSettingsSerializer
+    permission_classes = [permissions.AllowAny]
+    def get_object(self):
+        return get_object_or_404(SiteSettings, pk=1, published=True)
 
 class SubmissionThrottle(AnonRateThrottle):
     scope = "submission"

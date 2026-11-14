@@ -73,6 +73,43 @@ class BackendTests(TestCase):
     def test_health(self):
         self.assertEqual(self.api.get("/health/").json(), {"status": "ok"})
 
+    def test_event_windows_and_types(self):
+        now = timezone.now()
+        past = Content.objects.create(kind="event", slug="past", title="Past conference", published=True, starts_at=now-timedelta(days=3), ends_at=now-timedelta(days=2))
+        current = Content.objects.create(kind="event", slug="current", title="In progress", published=True, starts_at=now-timedelta(days=1), ends_at=now+timedelta(days=1))
+        walk = Content.objects.create(kind="event", slug="walk", title="Walk", event_type="walk", published=True, starts_at=now+timedelta(days=3))
+        upcoming = self.api.get("/api/v1/content/?kind=event&event_window=upcoming&event_type=conference").json()["results"]
+        self.assertEqual([x["id"] for x in upcoming], [current.id])
+        archived = self.api.get("/api/v1/content/?kind=event&event_window=past").json()["results"]
+        self.assertEqual([x["id"] for x in archived], [past.id])
+        self.assertEqual(self.api.get("/api/v1/content/?kind=event&event_type=walk").json()["results"][0]["id"], walk.id)
+
+    def test_draft_speakers_are_not_exposed_through_events(self):
+        event = Content.objects.create(kind="event", slug="conference", title="Conference", published=True)
+        event.speakers.add(self.draft)
+        speaker = Content.objects.create(kind="speaker", slug="speaker", title="Speaker", published=True)
+        hidden = Content.objects.create(kind="speaker", slug="hidden", title="Hidden")
+        event.speakers.add(speaker, hidden)
+        data = self.api.get(f"/api/v1/content/{event.id}/").json()
+        self.assertEqual([person["id"] for person in data["speakers"]], [speaker.id])
+
+    def test_settings_are_only_public_after_publication(self):
+        from .models import SiteSettings
+        self.assertEqual(self.api.get("/api/v1/settings/").status_code, 404)
+        settings = SiteSettings.objects.create(homepage_title="Edited headline")
+        self.assertEqual(self.api.get("/api/v1/settings/").status_code, 404)
+        settings.published = True
+        settings.save()
+        response = self.api.get("/api/v1/settings/")
+        self.assertEqual(response.json()["homepage_title"], "Edited headline")
+        self.assertNotIn("published", response.json())
+        self.assertEqual(self.api.post("/api/v1/settings/", {"homepage_title": "Attack"}).status_code, 405)
+
+    def test_event_cannot_be_published_without_date(self):
+        item = Content(kind="event", slug="undated", title="Undated", published=True)
+        with self.assertRaises(ValidationError):
+            item.full_clean()
+
     def test_import_preserves_practice_body_and_admin_edits(self):
         import json
         from io import StringIO

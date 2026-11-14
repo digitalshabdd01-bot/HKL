@@ -29,6 +29,8 @@ class Content(models.Model):
     location = models.CharField(max_length=500, blank=True)
     country = models.CharField(max_length=100, blank=True)
     registration_url = models.URLField(max_length=2000, blank=True)
+    event_type = models.CharField(max_length=20, choices=[("conference", "Conference"), ("walk", "Walk")], default="conference")
+    profile_role = models.CharField(max_length=20, choices=[("speaker", "Speaker"), ("director", "Board director")], default="speaker")
     speakers = models.ManyToManyField("self", symmetrical=False, blank=True, limit_choices_to={"kind": "speaker"})
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -40,11 +42,33 @@ class Content(models.Model):
 
     def clean(self):
         from django.core.exceptions import ValidationError
+        if self.kind == "event" and self.published and not self.starts_at:
+            raise ValidationError({"starts_at": "Published events need a start date and time."})
         if self.starts_at and self.ends_at and self.ends_at < self.starts_at:
             raise ValidationError({"ends_at": "End must be after the start."})
 
     def __str__(self):
         return f"{self.get_kind_display()}: {self.title}"
+
+class SiteSettings(models.Model):
+    id = models.PositiveSmallIntegerField(primary_key=True, default=1, editable=False)
+    published = models.BooleanField(default=False, help_text="Enable to apply these settings to the website.")
+    homepage_title = models.CharField(max_length=160, default="A more beautiful world begins within.")
+    homepage_intro = models.TextField(max_length=1000, default="Rediscover the humility, kindness, and love already within you. Let that be the beginning of something beautiful.")
+    hero_image_url = models.URLField(max_length=2000, blank=True)
+    contact_email = models.EmailField(default="info@hkl.org")
+    footer_text = models.CharField(max_length=250, default="A more beautiful world begins with the way we live.")
+    instagram_url = models.URLField(blank=True)
+    youtube_url = models.URLField(blank=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    class Meta:
+        verbose_name_plural = "Site settings"
+        constraints = [models.CheckConstraint(condition=models.Q(id=1), name="singleton_site_settings")]
+    def save(self, *args, **kwargs):
+        self.pk = 1
+        super().save(*args, **kwargs)
+    def __str__(self):
+        return "Homepage and site settings"
 
 class Submission(models.Model):
     kind = models.CharField(max_length=20, choices=[("contact", "Contact enquiry"), ("volunteer", "Volunteer application")])
