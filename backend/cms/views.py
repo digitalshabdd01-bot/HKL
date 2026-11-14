@@ -22,6 +22,9 @@ class PublicContent:
     search_fields = ["title", "summary", "body"]
     def get_queryset(self):
         qs = Content.objects.filter(published=True, publish_at__lte=timezone.now(), language=self.request.query_params.get("language", "en"))
+        slug = self.request.query_params.get("slug")
+        if slug:
+            qs = qs.filter(slug=slug)
         kind = self.request.query_params.get("kind")
         if kind:
             qs = qs.filter(kind=kind)

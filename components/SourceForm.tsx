@@ -1,10 +1,12 @@
 "use client";
+import EnquiryForm from "./EnquiryForm";
 import { useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 import type { SourceField } from "../lib/hkl-source";
 
 export default function SourceForm({ fields, sourceUrl, title = "Get in touch" }: { fields: SourceField[]; sourceUrl: string; title?: string }) {
   const [prepared,setPrepared] = useState(false);
+  if (/^https:\/\/(?:www\.)?hkl\.org\/volunteer\/?$/.test(sourceUrl)) return <EnquiryForm kind="volunteer"/>;
   const key=(f:SourceField)=>f.type==="radio" ? `${f.name}:${f.value || f.label}` : f.name || f.label;
   const unique = fields.filter((f,i,list) => list.findIndex(x => key(x)===key(f))===i);
   const labels: Record<string,string> = { Name:"Full name", Age:"Age", Email:"Email address", "Mobile Number":"Mobile number with country code", Address:"Address", Country:"Country", Message:"Your message", Location:"City & country", full_name:"Full name", email:"Email address", q_location:"City & country", is_student:"Are you a student?", message:"Your message" };

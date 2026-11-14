@@ -19,7 +19,7 @@ class Command(BaseCommand):
                 image = item.get("image", "")
                 if image.startswith("/"):
                     image = ""  # Do not save broken relative image URLs on the separate API host.
-                defaults = {"title": item["title"], "summary": item.get("summary", ""), "body": "\n\n".join(item.get("paragraphs", [])), "image_url": image, "video_url": "https://www.youtube.com/watch?v=" + item["video"] if item.get("video") else "", "sort_order": index, "episode": item.get("episode")}
+                defaults = {"title": item["title"], "summary": item.get("summary", ""), "body": item.get("body") or "\n\n".join(item.get("paragraphs", [])), "image_url": image, "video_url": "https://www.youtube.com/watch?v=" + item["video"] if item.get("video") else "", "sort_order": index, "episode": item.get("episode")}
                 if item.get("isoDate"):
                     defaults["publish_at"] = timezone.make_aware(datetime.combine(datetime.fromisoformat(item["isoDate"]).date(), time.min))
                 _, added = Content.objects.get_or_create(kind=kind, slug=item["slug"], language="en", defaults=defaults)

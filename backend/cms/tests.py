@@ -31,6 +31,8 @@ class BackendTests(TestCase):
         Content.objects.create(kind="practice", slug="live", language="es", title="Práctica", published=True)
         self.assertEqual(self.api.get("/api/v1/content/?language=es").json()["count"], 1)
         self.assertEqual(self.api.get("/api/v1/content/?search=nonexistent").json()["count"], 0)
+        self.assertEqual(self.api.get("/api/v1/content/?kind=practice&slug=live").json()["count"], 1)
+        self.assertEqual(self.api.get("/api/v1/content/?slug=draft").json()["count"], 0)
 
     def test_submission_validation_and_privacy(self):
         payload = {"name": "Example", "email": "person@example.com", "message": "Please contact me", "consent": True, "status": "closed"}
@@ -70,3 +72,21 @@ class BackendTests(TestCase):
 
     def test_health(self):
         self.assertEqual(self.api.get("/health/").json(), {"status": "ok"})
+
+    def test_import_preserves_practice_body_and_admin_edits(self):
+        import json
+        from io import StringIO
+        from unittest.mock import patch
+        from django.core.management import call_command
+        fixture = {"practices": [{"slug": "imported", "title": "Imported practice", "body": "Keep this practice text."}], "talks": []}
+        with patch("pathlib.Path.read_text", return_value=json.dumps(fixture)):
+            call_command("import_hkl", stdout=StringIO())
+            item = Content.objects.get(slug="imported")
+            self.assertEqual(item.body, "Keep this practice text.")
+            self.assertFalse(item.published)
+            item.title = "Administrator edit"
+            item.save()
+            call_command("import_hkl", stdout=StringIO())
+            item.refresh_from_db()
+            self.assertEqual(item.title, "Administrator edit")
+            self.assertEqual(Content.objects.filter(slug="imported").count(), 1)

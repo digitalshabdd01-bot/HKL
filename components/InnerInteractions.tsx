@@ -3,6 +3,9 @@
 import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, CalendarDays, Check, Clock3, MapPin, Pause, Play, RotateCcw, Search, X } from "lucide-react";
 import { gatherings, talks } from "../lib/hkl-content";
+import EnquiryForm from "./EnquiryForm";
+import useEditorial from "./useEditorial";
+import type { Editorial } from "../lib/hkl-api";
 import { imageSrc } from "../lib/hkl-links";
 
 export function VideoPlayer({ id, title, image }: { id: string; title: string; image: string }) {
@@ -11,9 +14,10 @@ export function VideoPlayer({ id, title, image }: { id: string; title: string; i
 }
 
 export function TalksLibrary() {
+  const { items: sourceTalks, loading, error, retry } = useEditorial("talk", talks);
   const [search, setSearch] = useState("");
   const [order, setOrder] = useState("newest");
-  const [video, setVideo] = useState<(typeof talks)[number] | null>(null);
+  const [video, setVideo] = useState<(typeof talks)[number] | Editorial | null>(null);
   const dialog = useRef<HTMLDialogElement>(null);
   const trigger = useRef<HTMLElement | null>(null);
   useEffect(() => {
@@ -25,7 +29,9 @@ export function TalksLibrary() {
     return () => { document.body.style.overflow = previous; trigger.current?.focus(); };
   }, [video]);
   function close() { dialog.current?.close(); setVideo(null); }
-  const results = talks.filter(t => `${t.title} ${t.summary} ${t.episode}`.toLowerCase().includes(search.toLowerCase().trim())).sort((a,b) => order === "newest" ? b.isoDate.localeCompare(a.isoDate) : a.isoDate.localeCompare(b.isoDate));
+  const results = sourceTalks.filter(t => `${t.title} ${t.summary} ${t.episode}`.toLowerCase().includes(search.toLowerCase().trim())).sort((a,b) => order === "newest" ? b.isoDate.localeCompare(a.isoDate) : a.isoDate.localeCompare(b.isoDate));
+  if (loading) return <p role="status">Loading stories…</p>;
+  if (error) return <div role="alert"><p>{error}</p><button onClick={retry}>Try again</button></div>;
   return <><div className="library-toolbar"><label className="search-field"><Search size={17}/><span className="sr-only">Search stories</span><input type="search" value={search} onChange={e => setSearch(e.target.value)} placeholder="Find a story or a moment of inspiration"/></label><label className="sort-field">Sort by<select aria-label="Sort stories" value={order} onChange={e => setOrder(e.target.value)}><option value="newest">Newest first</option><option value="oldest">Oldest first</option></select></label></div><p className="results-count" aria-live="polite">{results.length} {results.length === 1 ? "episode" : "episodes"} to explore</p><div className="story-list inner-story-list">{results.map(t => <article className="story-row" key={t.slug}><span className="story-row-avatar" role="img" aria-label="Baba Ji at an HKL gathering"/><div className="story-row-copy"><span className="story-row-series">THE STORY OF OUR LIVES · EPISODE {t.episode}</span><h3><a href={`/stories/${t.slug}`}>{t.title}</a></h3><time className="story-row-date" dateTime={t.isoDate}>{t.date}</time><p>{t.summary}</p><div className="story-row-actions"><a className="button button-green" href={`/stories/${t.slug}`} aria-label={`Read more about ${t.title}`}>Read more<ArrowUpRight size={16}/></a></div></div><button className="story-row-media" aria-label={`Watch ${t.title}`} onClick={() => setVideo(t)}><img src={imageSrc(t.image)} alt={`${t.title} episode artwork`} loading="lazy"/><span className="story-row-play"><Play size={21} fill="currentColor"/></span><span className="story-row-watch">WATCH EPISODE <ArrowUpRight size={12}/></span></button></article>)}</div>{results.length === 0 && <div className="empty-results"><Search size={27}/><h3>No stories found.</h3><p>Try “love,” “courage,” or an episode number.</p><button className="text-link" onClick={() => setSearch("")}>Show all episodes <RotateCcw size={15}/></button></div>}<dialog ref={dialog} className="modal video-modal" aria-labelledby="library-video-title" onCancel={e => { e.preventDefault(); close(); }} onClick={e => { if(e.target === e.currentTarget) close(); }}><div className="modal-inner"><button className="modal-close" aria-label="Close video" onClick={close}><X size={22}/></button>{video && <><span className="eyebrow">THE STORY OF OUR LIVES · EPISODE {video.episode}</span><h2 id="library-video-title">{video.title}</h2><div className="video-frame"><iframe title={video.title} src={`https://www.youtube-nocookie.com/embed/${video.video}?autoplay=1&rel=0`} allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowFullScreen/></div><p className="video-note">Prefer another player? <a href={`https://www.youtube.com/watch?v=${video.video}`} target="_blank" rel="noreferrer">Watch on YouTube ↗</a>.</p></>}</div></dialog></>;
 }
 
@@ -42,6 +48,5 @@ export function GatheringList() {
 }
 
 export function ContactComposer() {
-  const [prepared, setPrepared] = useState(false);
-  return <form className="contact-form" onSubmit={e => {e.preventDefault(); const data = new FormData(e.currentTarget); const subject = `HKL enquiry: ${data.get("topic")}`; const body = `Name: ${data.get("name")}\nEmail: ${data.get("email")}\nLocation: ${data.get("location")}\n\n${data.get("message")}`; window.location.href = `mailto:info@hkl.org?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`; setPrepared(true);}}><span className="eyebrow">LET’S START A CONVERSATION</span><h2>We’d love to <em>hear from you.</em></h2><p>Write your message below, then review and send it in your email app.</p><div className="form-row"><label>Your name<input name="name" autoComplete="name" placeholder="Full name" required maxLength={120}/></label><label>Email address<input name="email" type="email" autoComplete="email" placeholder="you@example.com" required maxLength={200}/></label></div><div className="form-row"><label>City & country<input name="location" autoComplete="address-level2" placeholder="Where are you joining us from?" required maxLength={150}/></label><label>What is your message about?<select name="topic"><option>General enquiry</option><option>Conferences & gatherings</option><option>Volunteering</option><option>Organizing an HKL Walk</option><option>Press & media</option></select></label></div><label>Your message<textarea name="message" rows={5} placeholder="Tell us a little about how we can help…" required maxLength={5000}/></label><button className="button button-green" type="submit">Continue in email app <ArrowUpRight size={17}/></button><p className="form-note">Your message is sent only when you send the email. You can also use <a href="https://hkl.org/contact-us" target="_blank" rel="noreferrer">HKL’s online contact form ↗</a>.</p>{prepared && <p className="contact-status" role="status">Your email draft is ready to open. If your email app did not launch, use the online contact form or email info@hkl.org.</p>}</form>;
+  return <EnquiryForm/>;
 }
