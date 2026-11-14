@@ -1,6 +1,6 @@
 # HKL backend — phase 1
 
-Django 5.2 LTS + Django REST Framework. Django admin provides staff login, logout, permissions, content editing and enquiry review. PostgreSQL is required in production; SQLite is available for local development only. No default admin account or password is committed.
+Django 5.2 LTS + Django REST Framework. Django admin provides staff login, logout, permissions, content editing and enquiry review. Production supports MySQL or PostgreSQL; SQLite is available for local development only. See [MYSQL.md](MYSQL.md) for MySQL dependencies, connection settings and Docker deployment. No default admin account or password is committed.
 
 ## Local setup
 

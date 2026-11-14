@@ -1,5 +1,7 @@
 # Activate the HKL backend on Render
 
+For MySQL, use the Docker runtime and commands in [MYSQL.md](MYSQL.md); the native Python configuration below is the PostgreSQL deployment path. Do not pass a MySQL connection to the native Python build without installing the MySQL driver.
+
 Use a separate Python web service from `digitalshabdd01-bot/HKL`, branch `main`. Leave **Root Directory blank** so that the `content/` catalogs remain available to the importer. Earlier instructions to use `backend` as the service root are superseded by this guide.
 
 | Setting | Value |

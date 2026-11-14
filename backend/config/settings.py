@@ -1,6 +1,6 @@
 import os
 from pathlib import Path
-import dj_database_url
+from .database import database_config
 from django.core.exceptions import ImproperlyConfigured
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,10 +24,7 @@ MIDDLEWARE = ["django.middleware.security.SecurityMiddleware", "whitenoise.middl
 ROOT_URLCONF = "config.urls"
 TEMPLATES = [{"BACKEND": "django.template.backends.django.DjangoTemplates", "DIRS": [], "APP_DIRS": True, "OPTIONS": {"context_processors": ["django.template.context_processors.request", "django.contrib.auth.context_processors.auth", "django.contrib.messages.context_processors.messages"]}}]
 WSGI_APPLICATION = "config.wsgi.application"
-database_url = os.getenv("DATABASE_URL")
-if not DEBUG and not database_url:
-    raise ImproperlyConfigured("Production requires DATABASE_URL pointing to a persistent database.")
-DATABASES = {"default": dj_database_url.parse(database_url, conn_max_age=60) if database_url else {"ENGINE": "django.db.backends.sqlite3", "NAME": BASE_DIR / "db.sqlite3"}}
+DATABASES = {"default": database_config(BASE_DIR, DEBUG)}
 AUTH_PASSWORD_VALIDATORS = [{"NAME": "django.contrib.auth.password_validation." + name} for name in ["UserAttributeSimilarityValidator", "MinimumLengthValidator", "CommonPasswordValidator", "NumericPasswordValidator"]]
 LANGUAGE_CODE = "en-us"
 TIME_ZONE = "UTC"
