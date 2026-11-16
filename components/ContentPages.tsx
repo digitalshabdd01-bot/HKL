@@ -361,8 +361,8 @@ export function GatheringsPage() {
         title="Come as you are."
         emphasis="Grow together."
         description="Find a shared moment of reflection and connection with the HKL community."
-        image="amritsar.webp"
-        alt="A large audience at an HKL conference in Amritsar"
+        image="gatherings-hero.png"
+        alt="People arriving together for an HKL gathering"
       />
       <section className="section-pad">
         <div className="container">
@@ -377,8 +377,8 @@ export function GatheringsPage() {
       <section className="soft-section section-pad">
         <div className="container photo-editorial">
           <img
-            src="/images/walks.webp"
-            alt="An HKL Walk bringing the movement into a local community"
+            src="/images/walks-gathering.png"
+            alt="A small group sharing a quiet walk through a local park"
             loading="lazy"
           />
           <div>
@@ -517,8 +517,8 @@ export function ContactPage() {
         title="Every connection"
         emphasis="begins somewhere."
         description="Questions, ideas, or a wish to get involved? Let’s start a conversation."
-        image="connection.webp"
-        alt="A warm moment of connection at an HKL gathering"
+        image="contact/Sunrise Hiker Over Misty Mountains.webp"
+        alt="Sunrise hiker overlooking misty mountains"
       />
       <section className="section-pad">
         <div className="container contact-layout">
@@ -577,8 +577,8 @@ export function NewsletterPage() {
         title="A gentle reminder."
         emphasis="A moment for you."
         description="Receive weekly practices and stay connected with the global HKL movement."
-        image="love.webp"
-        alt="An HKL attendee taking a quiet moment to reflect"
+        image="newsletter/weekly-practice-dawn.png"
+        alt="A person reading a weekly reflection on their phone beside a morning window"
       />
       <SourceSection path="/newsletter" />
     </PageShell>

@@ -6,8 +6,8 @@ export const originalMission = library.originalMission;
 export const originalValues = library.originalValues;
 
 export const gatherings = [
-  { id: "bulandpuri", country: "India", title: "Come together in Bulandpuri", date: "15–17 November 2026", month: "NOV", day: "15–17", year: "2026", location: "Jalandhar, Punjab, India", venue: "The University, Bulandpuri", time: "10:00 AM – 5:00 PM", image: "bulandpuri.webp", description: "Three days to pause, reflect, and connect through Humility, Kindness & Love." },
-  { id: "putrajaya", country: "Malaysia", title: "A shared journey in Putrajaya", date: "9 January 2027", month: "JAN", day: "09", year: "2027", location: "Putrajaya, Malaysia", venue: "Plenary Hall, Putrajaya International Convention Centre", time: "10:00 AM – 5:00 PM", image: "community.webp", description: "An invitation to come together around the qualities that connect us as a human family." },
+  { id: "bulandpuri", country: "India", title: "Come together in Bulandpuri", date: "15–17 November 2026", month: "NOV", day: "15–17", year: "2026", location: "Jalandhar, Punjab, India", venue: "The University, Bulandpuri", time: "10:00 AM – 5:00 PM", image: "bulandpuri-gathering.png", description: "Three days to pause, reflect, and connect through Humility, Kindness & Love." },
+  { id: "putrajaya", country: "Malaysia", title: "A shared journey in Putrajaya", date: "9 January 2027", month: "JAN", day: "09", year: "2027", location: "Putrajaya, Malaysia", venue: "Plenary Hall, Putrajaya International Convention Centre", time: "10:00 AM – 5:00 PM", image: "putrajaya-gathering.png", description: "An invitation to come together around the qualities that connect us as a human family." },
 ];
 
 export const values = [
