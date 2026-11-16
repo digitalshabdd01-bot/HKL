@@ -24,6 +24,32 @@ Percent-encode special characters in the username/password. Never commit or send
 
 From `backend/`, run `python manage.py migrate` to create the Django/HKL tables, then run `python manage.py createsuperuser`. Optional commands `import_hkl` and `import_collections` populate reviewable drafts. The API code and frontend API URL do not change when switching database engines.
 
+## Windows application control blocks the native driver
+
+If importing `MySQLdb._mysql` fails with an application control / code integrity error, an optional Oracle Connector/Python backend can use Python code instead of the native mysqlclient extension. Keep Windows security enabled. The default driver remains mysqlclient.
+
+In PowerShell, from `backend/` with the virtual environment already created:
+
+```powershell
+.\.venv\Scripts\python.exe -m pip install -r requirements-mysql-pure.txt
+$env:MYSQL_DRIVER = "connector"
+```
+
+Keep the existing private `DATABASE_URL` and `DJANGO_DEBUG=true` in the same terminal. The database URL remains `mysql://...`; `MYSQL_DRIVER=connector` selects `mysql.connector.django` and forces `use_pure=True`. Strict SQL mode, UTF-8 and read-committed isolation remain configured. If `MYSQL_SSL_CA` is set, certificate and hostname verification remain enabled using Connector/Python's corresponding options.
+
+Check the selected driver without displaying credentials:
+
+```powershell
+.\.venv\Scripts\python.exe manage.py shell -c "from django.db import connection; print(connection.settings_dict['ENGINE']); print(connection.settings_dict['OPTIONS'].get('use_pure'))"
+.\.venv\Scripts\python.exe manage.py migrate
+```
+
+Expected driver output is `mysql.connector.django` followed by `True`. After migrations succeed, run `import_hkl`, `import_collections`, `createsuperuser`, and `runserver 127.0.0.1:8000` as described above. Stop on an error; imports should not run after failed migrations. Imported content starts as drafts for review.
+
+PowerShell environment variables apply only to the current terminal and its children. Set `MYSQL_DRIVER` and the private database environment again when opening a new backend terminal. To return to mysqlclient, install `requirements-mysql.txt` and remove the override with `Remove-Item Env:MYSQL_DRIVER`.
+
+This setting does not grant Windows an allow rule, change the root password, or alter application control policies. On a managed computer, follow the administrator's rules for installing Python packages.
+
 ## Render backend connected to MySQL
 
 Use Docker runtime with Dockerfile `backend/Dockerfile.mysql` and Docker build context `.` (repository root). Leave Root Directory blank. The container installs the MySQL driver and runs migrations at startup, once the database is reachable. Keep the existing settings from `DEPLOYMENT.md`, but supply the MySQL `DATABASE_URL`. Set `PORT` only if needed; Render normally supplies it.
