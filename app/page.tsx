@@ -41,7 +41,8 @@ const virtues = [
     line: "A little less ego. A little more openness.",
     text: originalValues.Humility,
     prompt: "Today, let someone else be heard before offering your own view.",
-    image: "humility.webp",
+
+       image: "/home/Ego and Openness at Sunset.webp",
     alt: "An HKL participant listening with hands together",
     icon: Sprout,
   },
@@ -51,7 +52,7 @@ const virtues = [
     text: originalValues.Kindness,
     prompt:
       "Today, offer one thoughtful act without expecting anything in return.",
-    image: "kindness.webp",
+    image: "/home/Small Gestures, Beautiful Ripples.webp",
     alt: "HKL participants greeting each other with respect",
     icon: Leaf,
   },
@@ -61,7 +62,8 @@ const virtues = [
     text: originalValues.Love,
     prompt:
       "Today, bring patience and understanding to a difficult conversation.",
-    image: "love.webp",
+    
+    image:"/home/Hands United at Sunrise.webp",
     alt: "An HKL attendee reflecting with her eyes closed",
     icon: Heart,
   },
@@ -434,13 +436,13 @@ export default function Home() {
             <div className="about-photos">
               <img
                 className="about-main"
-                src="/images/connection.webp"
+                src="images/home/Sunrise Serenity in the Hills.webp"
                 alt="A moment of connection at an HKL conference"
                 loading="lazy"
               />
               <div className="about-small">
                 <img
-                  src="/images/annie.webp"
+                  src="public/images/home/A Movement for the World.webp"
                   alt="Annie Hackwell smiling at an HKL gathering"
                   loading="lazy"
                 />
@@ -849,7 +851,7 @@ export default function Home() {
         <section id="community" className="community">
           <div className="community-image">
             <img
-              src="/images/parma.webp"
+              src="public\images\home\Group.webp"
               alt="Participants gathered at the international HKL conference in Parma, Italy"
               loading="lazy"
             />
