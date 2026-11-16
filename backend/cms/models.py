@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.conf import settings
 
 class Content(models.Model):
     class Kind(models.TextChoices):
@@ -34,6 +35,8 @@ class Content(models.Model):
     speakers = models.ManyToManyField("self", symmetrical=False, blank=True, limit_choices_to={"kind": "speaker"})
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    last_edited_by = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, editable=False, on_delete=models.SET_NULL, related_name="hkl_content_edits")
+    published_by = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, editable=False, on_delete=models.SET_NULL, related_name="hkl_content_publications")
 
     class Meta:
         ordering = ["sort_order", "-publish_at", "-id"]
@@ -81,6 +84,8 @@ class Submission(models.Model):
     consent = models.BooleanField(default=False)
     status = models.CharField(max_length=20, choices=[("new", "New"), ("reviewed", "Reviewed"), ("closed", "Closed")], default="new")
     created_at = models.DateTimeField(auto_now_add=True)
+    reviewed_at = models.DateTimeField(null=True, blank=True, editable=False)
+    reviewed_by = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, editable=False, on_delete=models.SET_NULL, related_name="hkl_submission_reviews")
     class Meta:
         ordering = ["-created_at"]
     def __str__(self):
