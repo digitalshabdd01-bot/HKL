@@ -18,11 +18,24 @@ def database_config(base_dir: Path, debug: bool, environment=None):
     if not debug and engine not in ["django.db.backends.mysql", "django.db.backends.postgresql"]:
         raise ImproperlyConfigured("Production requires MySQL or PostgreSQL; SQLite is for local development only.")
     if engine == "django.db.backends.mysql":
+        driver = env.get("MYSQL_DRIVER", "mysqlclient").strip().lower()
+        if driver not in {"mysqlclient", "connector"}:
+            raise ImproperlyConfigured("MYSQL_DRIVER must be mysqlclient or connector.")
         options = config.setdefault("OPTIONS", {})
         options["charset"] = "utf8mb4"
         options["init_command"] = "SET sql_mode='STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION'"
         options["isolation_level"] = "read committed"
+        if driver == "connector":
+            # Oracle's Django adapter supports the pure Python implementation.
+            # Do not spoof mysqlclient versions or load its native extension.
+            config["ENGINE"] = "mysql.connector.django"
+            options["use_pure"] = True
         if env.get("MYSQL_SSL_CA"):
-            options["ssl"] = {"ca": env["MYSQL_SSL_CA"]}
-            options["ssl_mode"] = "VERIFY_IDENTITY"
+            if driver == "connector":
+                options["ssl_ca"] = env["MYSQL_SSL_CA"]
+                options["ssl_verify_cert"] = True
+                options["ssl_verify_identity"] = True
+            else:
+                options["ssl"] = {"ca": env["MYSQL_SSL_CA"]}
+                options["ssl_mode"] = "VERIFY_IDENTITY"
     return config
