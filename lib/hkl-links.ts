@@ -40,4 +40,25 @@ export function localHref(href: string) {
   return path + url.search + hash;
 }
 
-export function imageSrc(value: string) { return value.startsWith("/") || value.startsWith("http") ? value : `/images/${value}`; }
+export function imageSrc(value: string) {
+  if (/^(?:https?:)?\/\//i.test(value) || value.startsWith("data:")) return value;
+  // Files inside public are served at the URL root, on Windows and Linux.
+  const clean = value.replace(/\\/g, "/").replace(/^\/?public\//, "").replace(/\/{2,}/g, "/");
+  if (clean.startsWith("/")) return clean;
+  return clean.startsWith("images/") ? `/${clean}` : `/images/${clean}`;
+}
+
+export function mapForImage(value: string) {
+  let source: URL;
+  try { source = new URL(value); } catch { return null; }
+  if (source.hostname !== "api.mapbox.com") return null;
+  const pin = /\/static\/[^/]*\((-?\d+(?:\.\d+)?),(-?\d+(?:\.\d+)?)\)/.exec(source.pathname);
+  if (!pin) return null;
+  const longitude = Number(pin[1]), latitude = Number(pin[2]);
+  if (Math.abs(longitude) > 180 || Math.abs(latitude) > 85) return null;
+  const embed = new URL("https://www.openstreetmap.org/export/embed.html");
+  embed.searchParams.set("bbox", [Math.max(-180, longitude - 0.03), Math.max(-85, latitude - 0.02), Math.min(180, longitude + 0.03), Math.min(85, latitude + 0.02)].map(n => n.toFixed(7)).join(","));
+  embed.searchParams.set("layer", "mapnik");
+  embed.searchParams.set("marker", `${latitude},${longitude}`);
+  return { embed: embed.href, href: `https://www.openstreetmap.org/?mlat=${latitude}&mlon=${longitude}#map=13/${latitude}/${longitude}` };
+}

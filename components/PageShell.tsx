@@ -1,6 +1,7 @@
 import { ArrowUpRight, ChevronRight } from "lucide-react";
 import SiteHeader from "./SiteHeader";
 import SiteFooter from "./SiteFooter";
+import { imageSrc } from "../lib/hkl-links";
 
 export function PageShell({ children }: { children: React.ReactNode }) {
   return (
@@ -35,7 +36,7 @@ export function PageHero({
 }) {
   return (
     <section className="page-hero">
-      <img src={`/images/${image}`} alt={alt} fetchPriority="high" />
+      <img src={imageSrc(image)} alt={alt} fetchPriority="high" />
       <div className="page-hero-shade" />
       <div className="container">
         <nav className="breadcrumbs" aria-label="Breadcrumb">
