@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import LanguageMenu from "./LanguageMenu";
-import { ArrowUpRight, ChevronDown, Menu, Sprout, X } from "lucide-react";
+import { ArrowUpRight, ChevronDown, Menu, X } from "lucide-react";
 
 type NavLink = { label: string; href: string; value?: number };
 type Feature = { title: string; caption: string; image: string; href: string; value?: number };
@@ -49,11 +49,11 @@ export default function SiteHeader({ onSelectVirtue }: { onSelectVirtue?: (value
   const navigate = (link: NavLink | Feature) => { if (link.value !== undefined) onSelectVirtue?.(link.value); setOpen(null); setMobile(false); };
   const closeDesktop = () => { const button = document.getElementById(`nav-${open}`); setOpen(null); button?.focus(); };
   const navButton = (section: Section, i: number) => <button
-    key={section.id} id={`nav-${section.id}`} className={`primary-nav-button ${open === section.id ? "active" : ""} ${section.id === currentSection && !open ? "nav-featured" : ""}`}
+    key={section.id} id={`nav-${section.id}`} className={`primary-nav-button ${i < 3 ? "nav-opening" : ""} ${open === section.id ? "active" : ""} ${section.id === currentSection && !open ? "nav-featured" : ""}`}
     aria-expanded={open === section.id} aria-controls={`mega-${section.id}`}
     onMouseEnter={() => setOpen(section.id)} onClick={() => setOpen(section.id)}
     onKeyDown={e => { if (e.key === "ArrowDown") { e.preventDefault(); setOpen(section.id); requestAnimationFrame(() => document.querySelector<HTMLAnchorElement>(`#mega-${section.id} a`)?.focus()); } }}
-  >{i === 0 && <Sprout size={17} strokeWidth={1.4}/>}<span>{section.label}</span><ChevronDown size={11}/></button>;
+  ><span>{section.label}</span><ChevronDown size={11} aria-hidden="true"/></button>;
 
   return <header ref={headerRef} className="site-header" onPointerLeave={e => { if (e.pointerType === "mouse" && !mobile) setOpen(null); }}>
     <div className="utility"><div className="container utility-inner"><nav aria-label="Quick links"><a href="/" onClick={() => { setOpen(null); setMobile(false); }}>Home</a><a href="/about">The HKL movement</a><a href="/gatherings">Conferences & gatherings</a></nav><nav aria-label="Connect with HKL"><a href="https://community.hkl.org/">Join the community <ArrowUpRight size={11}/></a><a href="/contact">Contact</a><a href="/newsletter">Weekly practices by email</a><LanguageMenu/></nav></div></div>
