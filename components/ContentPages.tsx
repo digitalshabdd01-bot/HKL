@@ -165,7 +165,7 @@ export function ValuesPage() {
         title="Simple qualities."
         emphasis="Profound possibilities."
         description="Humility, Kindness & Love. Three invitations to live with greater awareness."
-        image="kindness.webp"
+        image="generated/values-banner-saplings.webp"
         alt="Two participants greeting one another at an HKL gathering"
       />
       <nav className="value-jump" aria-label="Explore the three values">
@@ -245,7 +245,7 @@ export function PracticesPage() {
         title="A little practice."
         emphasis="A lasting change."
         description="Make room to return within, one sincere moment at a time."
-        image="mega-practices/Sunrise Sapling by the Misty Valley.webp"
+        image="generated/values-banner-saplings.webp"
         alt="An HKL attendee in a moment of quiet reflection"
       />
       <section className="section-pad">
@@ -313,8 +313,9 @@ export function StoriesPage() {
         title="Inspiration for"
         emphasis="everyday living."
         description="Watch, listen, and carry a thoughtful moment into the rest of your day."
-        image="humility.webp"
+        image="generated/stories-banner.webp"
         alt="An HKL participant listening with an open heart"
+        showShade={false}
       />
       <section className="section-pad inspiration">
         <div className="container">
@@ -477,8 +478,9 @@ export function PublicationPage() {
         title="Goodness, from"
         emphasis="around the world."
         description="A fortnightly publication celebrating the people and everyday efforts of the HKL movement."
-        image="parma.webp"
+        image="generated/hkl-time-banner.webp"
         alt="The HKL community coming together in Parma, Italy"
+        showShade={false}
       />
       {backendEnabled ? (
         <section className="section-pad container">
@@ -500,7 +502,7 @@ export function VolunteerPage() {
         title="Offer your time."
         emphasis="Share your heart."
         description="Bring your skills, your care, and your willingness to help the movement grow."
-        image="kindness.webp"
+        image="generated/kindness.png"
         alt="HKL participants connecting with kindness"
       />
       <SourceSection path="/volunteer" formTitle="Become an HKL volunteer" />

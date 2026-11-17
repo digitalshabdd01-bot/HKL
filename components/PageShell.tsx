@@ -26,6 +26,7 @@ export function PageHero({
   description,
   image,
   alt,
+  showShade = true,
 }: {
   eyebrow: string;
   title: string;
@@ -33,11 +34,12 @@ export function PageHero({
   description: string;
   image: string;
   alt: string;
+  showShade?: boolean;
 }) {
   return (
     <section className="page-hero">
       <img src={imageSrc(image)} alt={alt} fetchPriority="high" />
-      <div className="page-hero-shade" />
+      {showShade && <div className="page-hero-shade" />}
       <div className="container">
         <nav className="breadcrumbs" aria-label="Breadcrumb">
           <a href="/">Home</a>

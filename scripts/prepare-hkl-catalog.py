@@ -61,7 +61,7 @@ for page in english:
         body=[b['text'] for b in blocks[first_heading+1:] if b['kind']=='p' and len(b.get('text',''))>50]
         summary=short_text(body[0] if body else page.get('description',''))
         slug=path.rsplit('/',1)[-1]
-        item={'slug':slug.removesuffix('-of-our-lives'),'originalSlug':slug,'sourcePath':path,'title':heading,'date':date,'isoDate':date_iso(date),'image':image_url(first_image) or '/images/mega-practices/Sunrise Sapling by the Misty Valley.webp','video':video,'summary':summary,'source':page['url']}
+        item={'slug':slug.removesuffix('-of-our-lives'),'originalSlug':slug,'sourcePath':path,'title':heading,'date':date,'isoDate':date_iso(date),'image':image_url(first_image) or '/images/generated/values-banner-saplings.webp','video':video,'summary':summary,'source':page['url']}
         if path.startswith('/stories/'):
             episode=next((int(re.sub(r'\D','',b['text'])) for b in blocks[:first_heading] if b['kind']=='p' and re.fullmatch(r'(Episode\s*)?\d+',b.get('text',''))),0)
             item.update({'episode':episode,'paragraphs':body,'question':''});talks.append(item)

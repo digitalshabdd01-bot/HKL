@@ -60,7 +60,7 @@ const weeklyPracticeFeatures: Feature[] = [
   {
     title: "A little practice. A lasting change.",
     caption: "MAKE TIME TO RETURN WITHIN",
-    image: "mega-practices/Sunrise Sapling by the Misty Valley.webp",
+    image: "generated/values-banner-saplings.webp",
     href: "/practices",
   },
   {
