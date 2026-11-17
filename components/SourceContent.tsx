@@ -1,7 +1,7 @@
 import { ArrowUpRight } from "lucide-react";
 import type { SourceBlock } from "../lib/hkl-source";
 import { getSourcePage, sourceHtml, sourceImage } from "../lib/hkl-source";
-import { localHref } from "../lib/hkl-links";
+import { localHref, mapForImage } from "../lib/hkl-links";
 import SourceForm from "./SourceForm";
 
 function Embed({ block }: { block: SourceBlock }) {
@@ -18,7 +18,12 @@ function Embed({ block }: { block: SourceBlock }) {
 }
 
 function MediaGroup({ blocks }: { blocks: SourceBlock[] }) {
-  return <div className={`source-gallery ${blocks.length===1 ? "single" : ""}`}>{blocks.map((b,i) => <figure key={`${b.url}-${i}`}><a href={sourceImage(b.url!)} target="_blank" rel="noreferrer" aria-label={`View ${b.alt || "HKL photograph"}`}><img src={sourceImage(b.url!)} alt={b.alt && !/placeholder|editable/i.test(b.alt) ? b.alt : "A photograph from the HKL movement"} loading="lazy"/></a></figure>)}</div>;
+  return <div className={`source-gallery ${blocks.length===1 ? "single" : ""}`}>{blocks.map((b,i) => {
+    // Imported Mapbox static images require an access token. Preserve the venue
+    // coordinates in an attributed public map rather than requesting a broken image.
+    const map = mapForImage(b.url || "");
+    return <figure key={`${b.url}-${i}`}>{map ? <><iframe title={b.alt || "HKL venue location"} src={map.embed} loading="lazy" style={{ width: "100%", height: "auto", aspectRatio: "8 / 5", border: 0, display: "block" }}/><figcaption><a href={map.href} target="_blank" rel="noreferrer">View location on OpenStreetMap ↗</a></figcaption></> : <a href={sourceImage(b.url!)} target="_blank" rel="noreferrer" aria-label={`View ${b.alt || "HKL photograph"}`}><img src={sourceImage(b.url!)} alt={b.alt && !/placeholder|editable/i.test(b.alt) ? b.alt : "A photograph from the HKL movement"} loading="lazy"/></a>}</figure>;
+  })}</div>;
 }
 
 export function SourceBlocks({ blocks, sourceUrl, omitHeading, formTitle }: { blocks: SourceBlock[]; sourceUrl: string; omitHeading?: string; formTitle?: string }) {

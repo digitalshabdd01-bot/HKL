@@ -7,6 +7,7 @@ import SiteHeader from "../components/SiteHeader";
 import SiteFooter from "../components/SiteFooter";
 import MoreFromHKL from "../components/MoreFromHKL";
 import { originalMission, originalValues } from "../lib/hkl-content";
+import { imageSrc } from "../lib/hkl-links";
 import {
   ArrowUpRight,
   ChevronDown,
@@ -42,7 +43,7 @@ const virtues = [
     text: originalValues.Humility,
     prompt: "Today, let someone else be heard before offering your own view.",
 
-       image: "/home/Ego and Openness at Sunset.webp",
+    image: "home/Ego and Openness at Sunset.webp",
     alt: "An HKL participant listening with hands together",
     icon: Sprout,
   },
@@ -52,7 +53,7 @@ const virtues = [
     text: originalValues.Kindness,
     prompt:
       "Today, offer one thoughtful act without expecting anything in return.",
-    image: "/home/Small Gestures, Beautiful Ripples.webp",
+    image: "home/Small Gestures, Beautiful Ripples.webp",
     alt: "HKL participants greeting each other with respect",
     icon: Leaf,
   },
@@ -63,7 +64,7 @@ const virtues = [
     prompt:
       "Today, bring patience and understanding to a difficult conversation.",
     
-    image:"/home/Hands United at Sunrise.webp",
+    image: "home/Hands United at Sunrise.webp",
     alt: "An HKL attendee reflecting with her eyes closed",
     icon: Heart,
   },
@@ -109,7 +110,7 @@ const stories = [
     category: "Weekly practices",
     title: "A moment to return within",
     text: "Explore the latest HKL practice and make space for a regular daily reflection.",
-    image: "love.webp",
+    image: "mega-practices/Sunrise Sapling by the Misty Valley.webp",
     tag: "WEEKLY PRACTICES",
     date: "PRACTICE AT YOUR OWN PACE",
     link: "/practices",
@@ -352,7 +353,7 @@ export default function Home() {
           <div className="hero-photo">
             {heroPhotos.map((p, i) => (
               <img
-                src={p.src.startsWith("http") ? p.src : `/images/${p.src}`}
+                src={imageSrc(p.src)}
                 alt={p.alt}
                 key={p.src}
                 className={`hero-slide ${photo === i ? "active" : ""}`}
@@ -436,13 +437,13 @@ export default function Home() {
             <div className="about-photos">
               <img
                 className="about-main"
-                src="images/home/Sunrise Serenity in the Hills.webp"
+                src="/images/home/Sunrise Serenity in the Hills.webp"
                 alt="A moment of connection at an HKL conference"
                 loading="lazy"
               />
               <div className="about-small">
                 <img
-                  src="public/images/home/A Movement for the World.webp"
+                  src="/images/home/A Movement for the World.webp"
                   alt="Annie Hackwell smiling at an HKL gathering"
                   loading="lazy"
                 />
@@ -521,7 +522,7 @@ export default function Home() {
                 key={activeVirtue}
               >
                 <img
-                  src={`/images/${value.image}`}
+                  src={imageSrc(value.image)}
                   alt={value.alt}
                   loading="lazy"
                 />
@@ -715,7 +716,7 @@ export default function Home() {
                         aria-label={`Watch ${s.title}`}
                       >
                         <img
-                          src={`/images/${s.image}`}
+                          src={imageSrc(s.image)}
                           alt={`${s.title} episode artwork`}
                           loading="lazy"
                         />
@@ -732,7 +733,7 @@ export default function Home() {
                       <div className="story-image">
                         <a href={s.link}>
                           <img
-                            src={`/images/${s.image}`}
+                            src={imageSrc(s.image)}
                             alt={s.title}
                             loading="lazy"
                           />
@@ -816,7 +817,7 @@ export default function Home() {
                       </div>
                       <div className="event-image">
                         <img
-                          src={`/images/${e.image}`}
+                          src={imageSrc(e.image)}
                           alt={`HKL community photograph illustrating the ${e.country} gathering`}
                           loading="lazy"
                         />
@@ -851,7 +852,7 @@ export default function Home() {
         <section id="community" className="community">
           <div className="community-image">
             <img
-              src="public\images\home\Group.webp"
+              src="/images/home/Group.webp"
               alt="Participants gathered at the international HKL conference in Parma, Italy"
               loading="lazy"
             />
@@ -1093,7 +1094,7 @@ export default function Home() {
           {modal?.type === "event" && (
             <div className="event-modal">
               <img
-                src={`/images/${events[modal.index].image}`}
+                src={imageSrc(events[modal.index].image)}
                 alt="HKL conference participants"
               />
               <span className="eyebrow">AN INVITATION TO CONNECT</span>

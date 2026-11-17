@@ -32,7 +32,7 @@ export function AboutPage() {
         title="A movement for the world."
         emphasis="A journey for you."
         description="Discover the invitation at the heart of Humility, Kindness & Love."
-        image="/about/Sunrise Hiker Over Misty Mountains.webp"
+        image="about/Sunrise Hiker Over Misty Mountains.webp"
         alt="Baba Ji sharing a moment of connection at an HKL conference"
       />
       <section className="section-pad">
@@ -131,7 +131,7 @@ export function AboutPage() {
       <section className="section-pad">
         <div className="container photo-editorial">
           <img
-            src="images/about/Global Unity Around Earth.webp"
+            src="/images/about/Global Unity Around Earth.webp"
             alt="People gathered at the international HKL conference in Parma"
             loading="lazy"
           />
@@ -245,7 +245,7 @@ export function PracticesPage() {
         title="A little practice."
         emphasis="A lasting change."
         description="Make room to return within, one sincere moment at a time."
-        image="love.webp"
+        image="mega-practices/Sunrise Sapling by the Misty Valley.webp"
         alt="An HKL attendee in a moment of quiet reflection"
       />
       <section className="section-pad">

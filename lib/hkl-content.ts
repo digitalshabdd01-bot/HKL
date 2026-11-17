@@ -13,7 +13,7 @@ export const gatherings = [
 export const values = [
   { id: "humility", name: "Humility", number: "01", line: "Make room for another way of seeing.", image: "humility.webp", text: library.originalValues.Humility, prompt: "Let someone finish their thought. Listen to understand before you respond.", question: "What could I learn if I approached this moment with curiosity?" },
   { id: "kindness", name: "Kindness", number: "02", line: "Turn care into an everyday action.", image: "kindness.webp", text: library.originalValues.Kindness, prompt: "Offer one thoughtful act today without waiting to be asked.", question: "Who around me might appreciate a little extra care today?" },
-  { id: "love", name: "Love", number: "03", line: "Recognize the humanity we share.", image: "love.webp", text: library.originalValues.Love, prompt: "Bring patience to one conversation that usually feels difficult.", question: "How might I meet this person with a more open heart?" },
+  { id: "love", name: "Love", number: "03", line: "Recognize the humanity we share.", image: "mega-practices/Sunrise Sapling by the Misty Valley.webp", text: library.originalValues.Love, prompt: "Bring patience to one conversation that usually feels difficult.", question: "How might I meet this person with a more open heart?" },
 ];
 
 export const walkCalendar = "https://luma.com/embed/calendar/cal-9VdcsmCMBN3zqy5/events";
