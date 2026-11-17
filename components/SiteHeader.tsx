@@ -10,6 +10,8 @@ type Feature = {
   title: string;
   caption: string;
   image: string;
+  imageViewBox?: string;
+  imageSize?: readonly [number, number];
   href: string;
   value?: number;
 };
@@ -21,22 +23,36 @@ type Section = {
   features: Feature[];
 };
 
+// Display the exact photographs supplied in the reference sheets. The SVG
+// viewport excludes the surrounding navigation and captions without changing
+// the supplied image files.
+const menuPhotos = {
+  story: { image: "mega-menu/conscious-living.png", imageViewBox: "366 176 283 187", imageSize: [1363, 487] },
+  practice: { image: "mega-menu/conscious-living.png", imageViewBox: "674 176 283 187", imageSize: [1363, 487] },
+  reflection: { image: "mega-menu/conscious-living.png", imageViewBox: "982 176 283 187", imageSize: [1363, 487] },
+  journey: { image: "mega-menu/about-hkl.png", imageViewBox: "369 159 283 187", imageSize: [1366, 547] },
+  connection: { image: "mega-menu/about-hkl.png", imageViewBox: "677 159 283 187", imageSize: [1366, 547] },
+  community: { image: "mega-menu/about-hkl.png", imageViewBox: "985 159 283 187", imageSize: [1366, 547] },
+  bulandpuri: { image: "mega-menu/gatherings.png", imageViewBox: "677 153 283 187", imageSize: [1358, 525] },
+  lakeside: { image: "mega-menu/gatherings.png", imageViewBox: "985 153 283 187", imageSize: [1358, 525] },
+} as const;
+
 const practice: Feature = {
   title: "A little practice. A lasting change.",
   caption: "MAKE TIME TO RETURN WITHIN",
-  image: "love.webp",
+  ...menuPhotos.practice,
   href: "/practices",
 };
 const story: Feature = {
   title: "The Story of Our Lives",
   caption: "WATCH, LISTEN & REFLECT",
-  image: "humility.webp",
+  ...menuPhotos.story,
   href: "/stories",
 };
 const gathering: Feature = {
   title: "Find connection, in person.",
   caption: "COME AS YOU ARE",
-  image: "community.webp",
+  ...menuPhotos.connection,
   href: "/gatherings",
 };
 
@@ -67,9 +83,9 @@ const sections: Section[] = [
     { title: "Let small gestures ripple out.", caption: "KINDNESS", image: "mega/value-kindness.png", href: "/values#kindness", value: 1 },
     { title: "Remember what connects us.", caption: "LOVE", image: "mega/value-love.png", href: "/values#love", value: 2 },
   ] },
-  { id: "stories", label: "Conscious Living", intro: "Thoughtful conversations and reflections to carry with you.", links: [{ label: "Explore stories & talks", href: "/stories" }, { label: "The Story of Our Lives", href: "/stories" }, { label: "The Path of Love", href: "/stories/the-path-of-love" }, { label: "The HKL Time", href: "/the-hkl-time" }], features: [story, practice, { title: "Goodness from around the world.", caption: "READ THE HKL TIME", image: "parma.webp", href: "/the-hkl-time" }] },
-  { id: "about", label: "About HKL", intro: "A global movement. A personal journey. A place for everyone.", links: [{ label: "Our movement", href: "/about" }, { label: "The complete HKL message", href: "/movement" }, { label: "Board of directors", href: "/board-of-directors" }, { label: "Meet the speakers", href: "/speakers" }, { label: "Our shared values", href: "/values" }, { label: "Our global community", href: "/community" }, { label: "Become a volunteer", href: "/volunteer" }, { label: "Contact us", href: "/contact" }], features: [{ title: "A journey that starts within.", caption: "DISCOVER THE MOVEMENT", image: "connection.webp", href: "/about" }, gathering, { title: "Many cultures. One human family.", caption: "MEET OUR COMMUNITY", image: "parma.webp", href: "/community" }] },
-  { id: "gatherings", label: "Gatherings", intro: "Pause, share, and grow with people on the same journey.", links: [{ label: "Upcoming conferences", href: "/gatherings" }, { label: "Conference archive", href: "/gatherings#conference-archive" }, { label: "Bulandpuri, India", href: "/gatherings#bulandpuri" }, { label: "Putrajaya, Malaysia", href: "/gatherings#putrajaya" }, { label: "Discover HKL Walks", href: "/walks" }, { label: "Join the community", href: "https://community.hkl.org/" }], features: [gathering, { title: "Come together in Bulandpuri.", caption: "15–17 NOVEMBER 2026", image: "bulandpuri.webp", href: "/gatherings" }, { title: "Find your HKL community.", caption: "CONTINUE THE CONNECTION", image: "kindness.webp", href: "https://community.hkl.org/" }] },
+  { id: "stories", label: "Conscious Living", intro: "Thoughtful conversations and reflections to carry with you.", links: [{ label: "Explore stories & talks", href: "/stories" }, { label: "The Story of Our Lives", href: "/stories" }, { label: "The Path of Love", href: "/stories/the-path-of-love" }, { label: "The HKL Time", href: "/the-hkl-time" }], features: [story, practice, { title: "Goodness from around the world.", caption: "READ THE HKL TIME", ...menuPhotos.reflection, href: "/the-hkl-time" }] },
+  { id: "about", label: "About HKL", intro: "A global movement. A personal journey. A place for everyone.", links: [{ label: "Our movement", href: "/about" }, { label: "The complete HKL message", href: "/movement" }, { label: "Board of directors", href: "/board-of-directors" }, { label: "Meet the speakers", href: "/speakers" }, { label: "Our shared values", href: "/values" }, { label: "Our global community", href: "/community" }, { label: "Become a volunteer", href: "/volunteer" }, { label: "Contact us", href: "/contact" }], features: [{ title: "A journey that starts within.", caption: "DISCOVER THE MOVEMENT", ...menuPhotos.journey, href: "/about" }, gathering, { title: "Many cultures. One human family.", caption: "MEET OUR COMMUNITY", ...menuPhotos.community, href: "/community" }] },
+  { id: "gatherings", label: "Gatherings", intro: "Pause, share, and grow with people on the same journey.", links: [{ label: "Upcoming conferences", href: "/gatherings" }, { label: "Conference archive", href: "/gatherings#conference-archive" }, { label: "Bulandpuri, India", href: "/gatherings#bulandpuri" }, { label: "Putrajaya, Malaysia", href: "/gatherings#putrajaya" }, { label: "Discover HKL Walks", href: "/walks" }, { label: "Join the community", href: "https://community.hkl.org/" }], features: [gathering, { title: "Come together in Bulandpuri.", caption: "15–17 NOVEMBER 2026", ...menuPhotos.bulandpuri, href: "/gatherings" }, { title: "Find your HKL community.", caption: "CONTINUE THE CONNECTION", ...menuPhotos.lakeside, href: "https://community.hkl.org/" }] },
   { id: "explore", label: "Explore", intro: "Find your next moment of inspiration, connection, or reflection.", links: [{ label: "All HKL resources", href: "/resources" }, { label: "All stories & talks", href: "/stories" }, { label: "WhatsApp channels", href: "/channel" }, { label: "Install the practice app", href: "/practice-app" }, { label: "The HKL Time", href: "/the-hkl-time" }, { label: "HKL Walks", href: "/walks" }, { label: "Weekly practices", href: "/practices" }, { label: "Support the movement", href: "/donate" }], features: [story, practice, gathering] },
 ];
 
@@ -267,14 +283,32 @@ export default function SiteHeader({
                   className="nav-feature"
                   onClick={() => navigate(feature)}
                 >
-                  <div className="nav-feature-image">
-                    <img
-                      src={`/images/${feature.image}`}
-                      alt={feature.title}
-                    />
-                    <span>
-                      <ArrowUpRight size={18} />
-                    </span>
+                  <div className={`nav-feature-image${feature.imageViewBox ? " nav-feature-image-reference" : ""}`}>
+                    {feature.imageViewBox && feature.imageSize ? (
+                      <svg
+                        className="nav-feature-photo"
+                        viewBox={feature.imageViewBox}
+                        preserveAspectRatio="xMidYMid slice"
+                        role="img"
+                        aria-label={feature.title}
+                      >
+                        <image
+                          href={`/images/${feature.image}`}
+                          width={feature.imageSize[0]}
+                          height={feature.imageSize[1]}
+                        />
+                      </svg>
+                    ) : (
+                      <img
+                        src={`/images/${feature.image}`}
+                        alt={feature.title}
+                      />
+                    )}
+                    {!feature.imageViewBox && (
+                      <span>
+                        <ArrowUpRight size={18} />
+                      </span>
+                    )}
                   </div>
                   <span className="nav-feature-caption">{feature.caption}</span>
                   <h3>{feature.title}</h3>
