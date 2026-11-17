@@ -1,10 +1,9 @@
 /* The two-level navigation and full-width image hero share the HKL palette. */
 html {
-  scroll-padding-top: 156px;
+  scroll-padding-top: 24px;
 }
 .site-header {
-  position: sticky;
-  top: 0;
+  position: relative;
   z-index: 40;
   background: var(--cream);
   border-bottom: 3px solid #b6a373;
@@ -585,9 +584,6 @@ html {
   }
 }
 @media (max-width: 900px) {
-  html {
-    scroll-padding-top: 125px;
-  }
   .utility {
     height: 30px;
     font-size: 9px;
@@ -735,9 +731,6 @@ html {
   }
 }
 @media (max-width: 680px) {
-  html {
-    scroll-padding-top: 118px;
-  }
   .utility {
     height: 29px;
     font-size: 8px;
