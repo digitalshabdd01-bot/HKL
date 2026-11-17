@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import LanguageMenu from "./LanguageMenu";
-import { ArrowUpRight, ChevronDown, Menu, Sprout, X } from "lucide-react";
+import { ArrowUpRight, ChevronDown, Menu, X } from "lucide-react";
 
 type NavLink = { label: string; href: string; value?: number };
 type Feature = {
@@ -61,11 +61,11 @@ const weeklyPracticeFeatures: Feature[] = [
   },
 ];
 const sections: Section[] = [
-  { id: "practices", label: "Mindful Practice", intro: "Bring a gentle moment of awareness into your everyday life.", links: [{ label: "Start a daily practice", href: "/practices" }, { label: "Take a mindful minute", href: "/practices#mindful-minute" }, { label: "Explore all practices", href: "/practices" }, { label: "The complete practice journey", href: "/practice-journey" }, { label: "Receive practices by email", href: "/newsletter" }], features: [practice, story, gathering] },
+  { id: "practices", label: "Mindful Practice", intro: "Bring a gentle moment of awareness into your everyday life.", links: [{ label: "Start a daily practice", href: "/practices" }, { label: "Take a mindful minute", href: "/practices#mindful-minute" }, { label: "Explore all practices", href: "/practices" }, { label: "The complete practice journey", href: "/practice-journey" }, { label: "Receive practices by email", href: "/newsletter" }], features: weeklyPracticeFeatures },
   { id: "values", label: "Inner Growth", intro: "Three simple qualities. A more beautiful way of being.", links: [{ label: "Discover our values", href: "/values" }, { label: "Humility", href: "/values#humility", value: 0 }, { label: "Kindness", href: "/values#kindness", value: 1 }, { label: "Love", href: "/values#love", value: 2 }, { label: "Begin your HKL journey", href: "/practices" }], features: [
-    { title: "Listen with an open heart.", caption: "HUMILITY", image: "humility.webp", href: "/values#humility", value: 0 },
-    { title: "Let small gestures ripple out.", caption: "KINDNESS", image: "kindness.webp", href: "/values#kindness", value: 1 },
-    { title: "Remember what connects us.", caption: "LOVE", image: "love.webp", href: "/values#love", value: 2 },
+    { title: "Listen with an open heart.", caption: "HUMILITY", image: "mega/value-humility.png", href: "/values#humility", value: 0 },
+    { title: "Let small gestures ripple out.", caption: "KINDNESS", image: "mega/value-kindness.png", href: "/values#kindness", value: 1 },
+    { title: "Remember what connects us.", caption: "LOVE", image: "mega/value-love.png", href: "/values#love", value: 2 },
   ] },
   { id: "stories", label: "Conscious Living", intro: "Thoughtful conversations and reflections to carry with you.", links: [{ label: "Explore stories & talks", href: "/stories" }, { label: "The Story of Our Lives", href: "/stories" }, { label: "The Path of Love", href: "/stories/the-path-of-love" }, { label: "The HKL Time", href: "/the-hkl-time" }], features: [story, practice, { title: "Goodness from around the world.", caption: "READ THE HKL TIME", image: "parma.webp", href: "/the-hkl-time" }] },
   { id: "about", label: "About HKL", intro: "A global movement. A personal journey. A place for everyone.", links: [{ label: "Our movement", href: "/about" }, { label: "The complete HKL message", href: "/movement" }, { label: "Board of directors", href: "/board-of-directors" }, { label: "Meet the speakers", href: "/speakers" }, { label: "Our shared values", href: "/values" }, { label: "Our global community", href: "/community" }, { label: "Become a volunteer", href: "/volunteer" }, { label: "Contact us", href: "/contact" }], features: [{ title: "A journey that starts within.", caption: "DISCOVER THE MOVEMENT", image: "connection.webp", href: "/about" }, gathering, { title: "Many cultures. One human family.", caption: "MEET OUR COMMUNITY", image: "parma.webp", href: "/community" }] },
@@ -160,7 +160,6 @@ export default function SiteHeader({
         }
       }}
     >
-      {i === 0 && <Sprout size={17} strokeWidth={1.4} />}
       <span>{section.label}</span>
       <ChevronDown size={11} />
     </button>
@@ -217,9 +216,7 @@ export default function SiteHeader({
             setMobile(false);
           }}
         >
-          <span className="nav-brand-title">
-            HKL<span>✷</span>
-          </span>
+          <span className="nav-brand-title">HKL</span>
           <span className="nav-brand-name">HUMILITY, KINDNESS & LOVE</span>
           <span className="nav-brand-subtitle">A GLOBAL MOVEMENT</span>
         </a>
@@ -273,7 +270,7 @@ export default function SiteHeader({
                   <div className="nav-feature-image">
                     <img
                       src={`/images/${feature.image}`}
-                      alt="HKL community and reflection"
+                      alt={feature.title}
                     />
                     <span>
                       <ArrowUpRight size={18} />
