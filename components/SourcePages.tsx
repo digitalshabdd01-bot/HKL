@@ -31,12 +31,27 @@ export function ConferenceArchive() {
 }
 
 export function FullMovementPage({ page }: { page: SourcePage }) {
+  const movementImages=[
+    "/images/generated/movement-inner-peace.png",
+    "/images/generated/movement-self-discovery.png",
+    "/images/generated/movement-kindness.png",
+    "/images/generated/movement-global-unity.png",
+    "/images/generated/movement-new-beginning.png",
+    "/images/generated/movement-shared-journey.png",
+    "/images/generated/movement-humility.png",
+    "/images/generated/movement-lotus.png",
+    "/images/generated/movement-reflection-chair.png",
+    "/images/generated/movement-kindness-light.png",
+    "/images/generated/movement-yoga-balance.png",
+    "/images/generated/movement-leaf-awakening.png",
+    "/images/generated/movement-stone-circle.png",
+  ];
   const sections=page.sections?.filter(s=>s.blocks.length>0) || [];
   const names:Record<string,string>={"section-0":"An invitation to HKL","section-1":"Upcoming conferences","section-2":"What is the HKL movement?","section-3":"The weekly practices","section-4":"A global movement & voices of connection","section-5":"Why we look within","section-6":"A path back to ourselves","section-7":"Come home to yourself","section-8":"Humility, Kindness & Love","section-9":"The Story of Our Lives","section-10":"Keep the practice close","section-11":"Stories of impact","section-12":"Join the global movement","section-13":"Follow HKL","section-14":"A recap of the HKL journey","section-15":"Our board of directors","section-16":"Questions about HKL"};
   const signature=(b:typeof page.blocks[number])=>b.kind+":"+(b.text || b.url || "");
   const inChapters=new Set(sections.flatMap(s=>s.blocks.map(signature)));
   const remaining=page.blocks.filter(b=>!inChapters.has(signature(b)));
-  return <PageShell><PageHero eyebrow="THE HKL GLOBAL MOVEMENT" title="Coming home to" emphasis="Humility, Kindness & Love." description="The message, people, practices, and shared journey at the heart of the movement." image="connection.webp" alt="A shared moment of connection in the HKL movement"/><section className="section-pad"><div className="container source-reading">{sections.length>0 ? <><div className="source-toc"><span className="eyebrow">EXPLORE THE MOVEMENT</span><nav aria-label="Movement chapters">{sections.map((s,i)=><a key={s.id} href={`#chapter-${i}`}>{names[s.id] || s.name}<ArrowUpRight size={12}/></a>)}</nav></div>{sections.map((s,i)=><details className="movement-chapter" id={`chapter-${i}`} key={s.id} open={s.id==="section-2"}><summary>{names[s.id] || s.name}<span>Explore this chapter</span></summary><SourceBlocks blocks={s.blocks} sourceUrl={page.url} omitHeading={page.heading}/></details>)}{remaining.length>0 && <SourceBlocks blocks={remaining} sourceUrl={page.url} omitHeading={page.heading}/>}</> : <SourceBlocks blocks={page.blocks} sourceUrl={page.url} omitHeading={page.heading}/>}</div></section><JourneyCTA/></PageShell>;
+  return <PageShell><PageHero eyebrow="THE HKL GLOBAL MOVEMENT" title="Coming home to" emphasis="Humility, Kindness & Love." description="The message, people, practices, and shared journey at the heart of the movement." image="generated/movement-inner-peace.png" alt="A quiet meditation beside a mountain lake"/><section className="section-pad"><div className="container source-reading">{sections.length>0 ? <><div className="source-toc"><span className="eyebrow">EXPLORE THE MOVEMENT</span><nav aria-label="Movement chapters">{sections.map((s,i)=><a key={s.id} href={`#chapter-${i}`}>{names[s.id] || s.name}<ArrowUpRight size={12}/></a>)}</nav></div>{sections.map((s,i)=><details className="movement-chapter" id={`chapter-${i}`} key={s.id} open={s.id==="section-2"}><summary>{names[s.id] || s.name}<span>Explore this chapter</span></summary><SourceBlocks blocks={s.blocks} sourceUrl={page.url} omitHeading={page.heading} imageSet={movementImages} imageOffset={i * 2}/></details>)}{remaining.length>0 && <SourceBlocks blocks={remaining} sourceUrl={page.url} omitHeading={page.heading} imageSet={movementImages} imageOffset={sections.length * 2}/>}</> : <SourceBlocks blocks={page.blocks} sourceUrl={page.url} omitHeading={page.heading} imageSet={movementImages}/>}</div></section><JourneyCTA/></PageShell>;
 }
 
 export function SourceDocumentPage({ page }: { page: SourcePage }) {
