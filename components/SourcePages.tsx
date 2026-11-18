@@ -7,7 +7,7 @@ import { ResourceDirectory } from "./ResourceDirectory";
 import { conferenceSummaries, getSourcePage, profileSummaries, resourceSummaries, sourceCategory, sourceImage, type SourcePage } from "../lib/hkl-source";
 
 export function AllResourcesPage() {
-  return <PageShell><PageHero eyebrow="ALL HKL RESOURCES" title="Every part of" emphasis="the journey." description="Explore the movement, complete stories and practices, our people, conferences, publications, and ways to take part." image="community.webp" alt="The global HKL community coming together"/><section className="section-pad"><div className="container"><ResourceDirectory resources={resourceSummaries}/></div></section><JourneyCTA/></PageShell>;
+  return <PageShell><PageHero eyebrow="ALL HKL RESOURCES" title="Every part of" emphasis="the journey." description="Explore the movement, complete stories and practices, our people, conferences, publications, and ways to take part." image="resources-journey-banner.png" alt="Two people sharing a moment of reflection with journals and books"/><section className="section-pad"><div className="container"><ResourceDirectory resources={resourceSummaries}/></div></section><JourneyCTA/></PageShell>;
 }
 
 export function PeopleDirectory({ boardOnly=false }: { boardOnly?: boolean }) {
