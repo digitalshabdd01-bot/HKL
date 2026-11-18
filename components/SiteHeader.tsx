@@ -232,9 +232,14 @@ export default function SiteHeader({
             setMobile(false);
           }}
         >
-          <span className="nav-brand-title">HKL</span>
-          <span className="nav-brand-name">HUMILITY, KINDNESS & LOVE</span>
-          <span className="nav-brand-subtitle">A GLOBAL MOVEMENT</span>
+          <img
+            className="nav-brand-logo"
+            src="/images/hkl-true-success-crest.png"
+            alt="HKL — True Success"
+            width={1275}
+            height={1234}
+            fetchPriority="high"
+          />
         </a>
         <button
           id="mobile-nav-toggle"

@@ -9,7 +9,7 @@ html {
   border-bottom: 3px solid #b6a373;
 }
 .utility {
-  height: 35px;
+  height: 28px;
   background: var(--deep);
   color: #e6ecdc;
   font-size: 10px;
@@ -36,12 +36,12 @@ html {
   color: #e8c69e;
 }
 .main-nav-shell {
-  height: 100px;
+  height: 72px;
   position: relative;
 }
 .primary-nav {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr)) 170px repeat(
+  grid-template-columns: repeat(3, minmax(0, 1fr)) 128px repeat(
       3,
       minmax(0, 1fr)
     );
@@ -79,52 +79,25 @@ html {
 }
 .nav-brand {
   position: absolute;
-  top: -2px;
+  top: -6px;
   left: 50%;
   transform: translateX(-50%);
-  width: 152px;
-  height: 139px;
+  width: 108px;
+  height: 108px;
   border-radius: 50%;
   background: var(--cream);
   border: 1px solid #e1e5d5;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  place-items: center;
   box-shadow: 0 6px 8px #1739250f;
   z-index: 2;
-  padding-top: 3px;
+  padding: 7px;
 }
-.nav-brand-title {
-  font-family: var(--serif);
-  font-size: 59px;
-  letter-spacing: -3.5px;
-  line-height: 1;
-  position: relative;
-  padding-right: 8px;
-  color: var(--green);
-}
-.nav-brand-title > span {
-  position: absolute;
-  right: -5px;
-  top: -4px;
-  font-size: 19px;
-  color: var(--terra);
-  letter-spacing: 0;
-}
-.nav-brand-name {
-  font-size: 5.5px;
-  font-weight: 600;
-  letter-spacing: 1.15px;
-  margin-top: 12px;
-  color: var(--green);
-}
-.nav-brand-subtitle {
-  font-size: 5px;
-  letter-spacing: 1.85px;
-  line-height: 1.7;
-  margin-top: 4px;
-  color: #8c997b;
+.nav-brand-logo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 .mobile-toggle,
 .mobile-join,
@@ -497,7 +470,7 @@ html {
     max-width: 1440px;
   }
   .primary-nav {
-    grid-template-columns: repeat(3, minmax(0, 1fr)) 190px repeat(
+    grid-template-columns: repeat(3, minmax(0, 1fr)) 136px repeat(
         3,
         minmax(0, 1fr)
       );
@@ -527,7 +500,7 @@ html {
 }
 @media (max-width: 1100px) {
   .primary-nav {
-    grid-template-columns: repeat(3, minmax(0, 1fr)) 150px repeat(
+    grid-template-columns: repeat(3, minmax(0, 1fr)) 116px repeat(
         3,
         minmax(0, 1fr)
       );
@@ -542,15 +515,8 @@ html {
     width: 9px;
   }
   .nav-brand {
-    width: 137px;
-    height: 130px;
-  }
-  .nav-brand-title {
-    font-size: 53px;
-  }
-  .nav-brand-name {
-    font-size: 5px;
-    letter-spacing: 1px;
+    width: 100px;
+    height: 100px;
   }
   .utility nav {
     gap: 20px;
@@ -599,7 +565,7 @@ html {
 }
 @media (max-width: 900px) {
   .utility {
-    height: 30px;
+    height: 28px;
     font-size: 9px;
   }
   .utility nav {
@@ -610,7 +576,7 @@ html {
     display: none;
   }
   .main-nav-shell {
-    height: 80px;
+    height: 64px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -620,31 +586,11 @@ html {
     display: none;
   }
   .nav-brand {
-    top: -1px;
-    width: 130px;
-    height: 104px;
-    border-radius: 0 0 65px 65px;
-    border-top: 0;
+    top: -5px;
+    width: 92px;
+    height: 92px;
+    border-radius: 50%;
     box-shadow: 0 4px 6px #1739250d;
-  }
-  .nav-brand-title {
-    font-size: 47px;
-    padding-right: 7px;
-  }
-  .nav-brand-title > span {
-    font-size: 15px;
-    right: -4px;
-    top: -4px;
-  }
-  .nav-brand-name {
-    font-size: 4.8px;
-    letter-spacing: 0.8px;
-    margin-top: 8px;
-  }
-  .nav-brand-subtitle {
-    font-size: 4px;
-    letter-spacing: 1.7px;
-    margin-top: 3px;
   }
   .mobile-toggle {
     display: grid;
@@ -663,7 +609,7 @@ html {
     left: 0;
     right: 0;
     top: 100%;
-    max-height: calc(100dvh - 113px);
+    max-height: calc(100dvh - 95px);
     overflow: auto;
     padding: 29px 36px 27px;
     background: var(--paper);
@@ -746,7 +692,7 @@ html {
 }
 @media (max-width: 680px) {
   .utility {
-    height: 29px;
+    height: 27px;
     font-size: 8px;
   }
   .utility-inner {
@@ -766,19 +712,14 @@ html {
     width: 10px;
   }
   .main-nav-shell {
-    height: 76px;
+    height: 60px;
     padding: 0 24px;
   }
   .nav-brand {
-    height: 100px;
-    width: 124px;
-  }
-  .nav-brand-title {
-    font-size: 45px;
-  }
-  .nav-brand-name {
-    font-size: 4.6px;
-    letter-spacing: 0.8px;
+    top: -4px;
+    height: 84px;
+    width: 84px;
+    padding: 6px;
   }
   .mobile-join {
     font-size: 9px;
@@ -792,7 +733,7 @@ html {
   }
   .mobile-navigation {
     padding: 28px 24px 25px;
-    max-height: calc(100dvh - 108px);
+    max-height: calc(100dvh - 90px);
   }
   .mobile-nav-group > button {
     font-size: 22px;
