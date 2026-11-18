@@ -165,7 +165,7 @@ export function ValuesPage() {
         title="Simple qualities."
         emphasis="Profound possibilities."
         description="Humility, Kindness & Love. Three invitations to live with greater awareness."
-        image="generated/values-banner-saplings.webp"
+        image="practices/practice-hero.png"
         alt="Two participants greeting one another at an HKL gathering"
       />
       <nav className="value-jump" aria-label="Explore the three values">
@@ -251,7 +251,14 @@ export function PracticesPage() {
       <section className="section-pad">
         <div className="container practice-page-intro">
           <div>
-            <SourceBlocks blocks={intro} sourceUrl={source.url} />
+            <SourceBlocks
+              blocks={intro}
+              sourceUrl={source.url}
+              imageSet={[
+                "/images/practices/intro-blossom.png",
+                "/images/practices/intro-values.png",
+              ]}
+            />
             <a className="text-link" href="/newsletter">
               Receive weekly practices by email <ArrowUpRight size={17} />
             </a>
@@ -410,8 +417,8 @@ export function CommunityPage() {
         title="Many journeys."
         emphasis="One human family."
         description="A place to share your intention, find connection, and take the next step together."
-        image="community.webp"
-        alt="Smiling participants sharing a joyful moment at an HKL conference"
+        image="community-global-banner.png"
+        alt="A diverse international community sharing a moment of connection outdoors"
       />
       <SourceSection path="/community" />
       <section className="section-pad">
@@ -450,8 +457,8 @@ export function WalksPage() {
         title="A shared message."
         emphasis="A step together."
         description="Bring Humility, Kindness & Love into the heart of your community."
-        image="walks.webp"
-        alt="People walking together with the message of Humility, Kindness & Love"
+        image="walks-community-banner.png"
+        alt="A small group walking together through a peaceful park"
       />
       <div id="walk-calendar" />
       {backendEnabled ? (

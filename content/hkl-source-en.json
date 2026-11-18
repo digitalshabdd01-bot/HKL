@@ -50,8 +50,8 @@
         },
         {
           "kind": "image",
-          "url": "https://framerusercontent.com/images/Zlwt5lpobvyJDYLUkzM6oLEOCSc.png?width=1236&height=472",
-          "alt": ""
+          "url": "/images/bulandpuri-gathering.png",
+          "alt": "People coming together at an HKL gathering in Bulandpuri"
         },
         {
           "kind": "p",
@@ -72,8 +72,8 @@
         { "kind": "p", "text": "Book on WhatsApp", "html": "Book on WhatsApp" },
         {
           "kind": "image",
-          "url": "https://framerusercontent.com/images/ABL2tJh8vPna0H2NewXyk685GXI.jpg?width=4528&height=3016",
-          "alt": ""
+          "url": "/images/putrajaya-gathering.png",
+          "alt": "People sharing a moment of reflection at an HKL gathering in Putrajaya"
         },
         { "kind": "p", "text": "9 Jan 2027", "html": "9 Jan 2027" },
         {
@@ -3017,8 +3017,8 @@
             },
             {
               "kind": "image",
-              "url": "https://framerusercontent.com/images/Zlwt5lpobvyJDYLUkzM6oLEOCSc.png?width=1236&height=472",
-              "alt": ""
+              "url": "/images/bulandpuri-gathering.png",
+              "alt": "People coming together at an HKL gathering in Bulandpuri"
             },
             {
               "kind": "p",
@@ -3043,8 +3043,8 @@
             },
             {
               "kind": "image",
-              "url": "https://framerusercontent.com/images/ABL2tJh8vPna0H2NewXyk685GXI.jpg?width=4528&height=3016",
-              "alt": ""
+              "url": "/images/putrajaya-gathering.png",
+              "alt": "People sharing a moment of reflection at an HKL gathering in Putrajaya"
             },
             { "kind": "p", "text": "9 Jan 2027", "html": "9 Jan 2027" },
             {
@@ -19876,8 +19876,8 @@
         },
         {
           "kind": "image",
-          "url": "https://framerusercontent.com/images/eyXMINPS53guXm7JN0eDuNcfxEA.png?width=1368&height=847",
-          "alt": "Become a volunteer- HKL Movement"
+          "url": "/images/volunteer/welcome.png",
+          "alt": "A diverse group of HKL volunteers together in a community garden"
         },
         {
           "kind": "p",
@@ -19892,8 +19892,8 @@
         { "kind": "h2", "text": "Why Volunteer?", "html": "Why Volunteer?" },
         {
           "kind": "image",
-          "url": "https://framerusercontent.com/images/yDKA32c2DmhG3qLiWfTaqnyUaAQ.jpg?width=2400&height=1600",
-          "alt": "HKL volunteer"
+          "url": "/images/volunteer/community-care.png",
+          "alt": "Volunteers sharing food and care with their community"
         },
         {
           "kind": "h2",
@@ -19922,8 +19922,8 @@
         },
         {
           "kind": "image",
-          "url": "https://framerusercontent.com/images/2XGyOW26nnV2xMa1fIsIvPgU.jpg?width=5472&height=3648",
-          "alt": "Join a local HKL city chapter"
+          "url": "/images/volunteer/local-chapter.png",
+          "alt": "A local volunteer group planning a community project"
         },
         {
           "kind": "h2",
@@ -19969,8 +19969,8 @@
         { "kind": "p", "text": "Volunteer Now", "html": "Volunteer Now" },
         {
           "kind": "image",
-          "url": "https://framerusercontent.com/images/XHPz0EGyDHGrkXluB5Ry0Qp96U.jpg?width=5472&height=3648",
-          "alt": "volunteer your skills"
+          "url": "/images/volunteer/skills.png",
+          "alt": "Volunteers collaborating on a creative community project"
         },
         {
           "kind": "h2",

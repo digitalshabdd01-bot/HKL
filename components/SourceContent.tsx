@@ -28,6 +28,7 @@ function MediaGroup({ blocks, imageSet }: { blocks: SourceBlock[]; imageSet?: st
 
 export function SourceBlocks({ blocks, sourceUrl, omitHeading, formTitle, imageSet, imageOffset = 0 }: { blocks: SourceBlock[]; sourceUrl: string; omitHeading?: string; formTitle?: string; imageSet?: string[]; imageOffset?: number }) {
   const output: React.ReactNode[]=[];
+  let imageIndex = 0;
   for(let i=0;i<blocks.length;i++) {
     const b=blocks[i];
     if(b.text && ["|","0","0 Mil","0 K","0,000,000 +","Loading globe data…","Read more","Install"].includes(b.text)) continue;
@@ -37,8 +38,9 @@ export function SourceBlocks({ blocks, sourceUrl, omitHeading, formTitle, imageS
       const images=[b];while(blocks[i+1]?.kind==="image")images.push(blocks[++i]);
       const displayImages=imageSet?.length ? images.map((img,index)=>{
         const directReference=/person|people|speaker|conference|attendee|board|foundation|minister|mayor|baba|annie|dr\.|auntie|company|organization/i.test(img.alt || "");
-        return directReference ? img : {...img,url:imageSet[(imageOffset + index) % imageSet.length]};
+        return directReference ? img : {...img,url:imageSet[(imageOffset + imageIndex + index) % imageSet.length]};
       }) : images;
+      imageIndex += images.length;
       if(images.length>8)output.push(<details className="source-gallery-expand" key={i}><summary>Explore the photographs <span>{images.length} images</span></summary><MediaGroup blocks={displayImages}/></details>);
       else output.push(<MediaGroup key={i} blocks={displayImages}/>);
     } else if(b.kind==="country") {

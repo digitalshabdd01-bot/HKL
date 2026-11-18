@@ -23,7 +23,7 @@ export function PeopleDirectory({ boardOnly=false }: { boardOnly?: boolean }) {
 }
 
 export function SpeakersPage() {
-  return <PageShell><PageHero eyebrow="PEOPLE OF THE MOVEMENT" title="Many perspectives." emphasis="A shared humanity." description="Meet the people sharing their experience, wisdom, and commitment to Humility, Kindness & Love." image="connection.webp" alt="A moment of connection at an HKL gathering"/><section className="section-pad"><div className="container"><div className="section-heading"><div><span className="eyebrow">VOICES FROM OUR CONFERENCES</span><h2>Meet the <em>speakers.</em></h2></div><a className="text-link" href="/italy2025speakers">Parma conference speakers <ArrowUpRight size={17}/></a></div><PeopleDirectory/></div></section><JourneyCTA/></PageShell>;
+  return <PageShell><PageHero eyebrow="PEOPLE OF THE MOVEMENT" title="Many perspectives." emphasis="A shared humanity." description="Meet the people sharing their experience, wisdom, and commitment to Humility, Kindness & Love." image="speakers-community-banner.png" alt="A diverse group sharing a thoughtful conversation at an HKL gathering"/><section className="section-pad"><div className="container"><div className="section-heading"><div><span className="eyebrow">VOICES FROM OUR CONFERENCES</span><h2>Meet the <em>speakers.</em></h2></div><a className="text-link" href="/italy2025speakers">Parma conference speakers <ArrowUpRight size={17}/></a></div><PeopleDirectory/></div></section><JourneyCTA/></PageShell>;
 }
 
 export function ConferenceArchive() {
