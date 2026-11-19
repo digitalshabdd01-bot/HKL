@@ -8,13 +8,13 @@ function Embed({ block }: { block: SourceBlock }) {
   const url=block.url || "";
   const youtube=/youtube(?:-nocookie)?\.com\/embed\/([^?&/]+)/.exec(url);
   const safe=youtube ? `https://www.youtube-nocookie.com/embed/${youtube[1]}?rel=0` : url;
-  const publication=url.includes("covver.com");
+  if (url.includes("covver.com")) return null;
   const signup=url.includes("sibforms.com");
   const calendar=url.includes("luma.com");
   const poll=url.includes("voting-poll");
   const donation=url.includes("stripe-donation");
-  const title=block.text && block.text!=="Youtube Video" ? block.text.replace(/\s*[—–-]\s*test form/i,"") : youtube ? "HKL talk and reflection" : publication ? "The HKL Time reader" : signup ? "Receive weekly practices by email" : calendar ? "Upcoming HKL Walks" : poll ? "HKL daily practice check-in" : "HKL community resource";
-  return <div className={`source-embed ${youtube ? "youtube" : signup ? "signup" : publication ? "publication" : donation ? "donation" : ""}`}><iframe title={title} src={safe} loading="lazy" allow={youtube ? "encrypted-media; picture-in-picture; fullscreen" : undefined} allowFullScreen={!!youtube}/><a href={youtube ? `https://www.youtube.com/watch?v=${youtube[1]}` : url} target="_blank" rel="noreferrer">{youtube ? "Watch on YouTube" : "Open this resource"} <ArrowUpRight size={12}/></a></div>;
+  const title=block.text && block.text!=="Youtube Video" ? block.text.replace(/\s*[—–-]\s*test form/i,"") : youtube ? "HKL talk and reflection" : signup ? "Receive weekly practices by email" : calendar ? "Upcoming HKL Walks" : poll ? "HKL daily practice check-in" : "HKL community resource";
+  return <div className={`source-embed ${youtube ? "youtube" : signup ? "signup" : donation ? "donation" : ""}`}><iframe title={title} src={safe} loading="lazy" allow={youtube ? "encrypted-media; picture-in-picture; fullscreen" : undefined} allowFullScreen={!!youtube}/><a href={youtube ? `https://www.youtube.com/watch?v=${youtube[1]}` : url} target="_blank" rel="noreferrer">{youtube ? "Watch on YouTube" : "Open this resource"} <ArrowUpRight size={12}/></a></div>;
 }
 
 function MediaGroup({ blocks, imageSet }: { blocks: SourceBlock[]; imageSet?: string[] }) {

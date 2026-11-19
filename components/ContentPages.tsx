@@ -22,6 +22,7 @@ import { practices, values, walkCalendar } from "../lib/hkl-content";
 import { getSourcePage } from "../lib/hkl-source";
 import { SourceBlocks, SourceSection } from "./SourceContent";
 import { ConferenceArchive } from "./SourcePages";
+import { EdmontonIntro, EdmontonContactDetails, KindnessCards } from "./EdmontonContent";
 import PracticeLibrary from "./PracticeLibrary";
 
 export function AboutPage() {
@@ -152,6 +153,7 @@ export function AboutPage() {
           </div>
         </div>
       </section>
+      <EdmontonIntro />
       <JourneyCTA />
     </PageShell>
   );
@@ -307,6 +309,8 @@ export function PracticesPage() {
           </a>
         </div>
       </section>
+      <KindnessCards />
+      <section className="reading-strip"><div className="container"><div><h2>A daily return <em>within.</em></h2><p>Explore Edmonton’s daily commitments and free meditation workshops.</p></div><ArrowLink href="/edmonton/turning-inward">Turning inward</ArrowLink><ArrowLink href="/edmonton/meditation">Meditation workshops</ArrowLink></div></section>
       <JourneyCTA />
     </PageShell>
   );
@@ -353,7 +357,7 @@ export function StoriesPage() {
             </h2>
           </div>
           <ArrowLink href="/practices">Weekly practices</ArrowLink>
-          <ArrowLink href="/the-hkl-time">The HKL Time</ArrowLink>
+          <ArrowLink href="/edmonton">HKL Edmonton</ArrowLink>
         </div>
       </section>
       <JourneyCTA />
@@ -404,6 +408,7 @@ export function GatheringsPage() {
           </div>
         </div>
       </section>
+      <EdmontonIntro />
       <JourneyCTA />
     </PageShell>
   );
@@ -444,6 +449,7 @@ export function CommunityPage() {
           </a>
         </div>
       </section>
+      <EdmontonIntro />
       <JourneyCTA />
     </PageShell>
   );
@@ -472,30 +478,7 @@ export function WalksPage() {
       ) : (
         <SourceSection path="/walks" />
       )}
-      <JourneyCTA />
-    </PageShell>
-  );
-}
-
-export function PublicationPage() {
-  return (
-    <PageShell>
-      <PageHero
-        eyebrow="THE HKL TIME"
-        title="Goodness, from"
-        emphasis="around the world."
-        description="A fortnightly publication celebrating the people and everyday efforts of the HKL movement."
-        image="generated/hkl-time-banner.webp"
-        alt="The HKL community coming together in Parma, Italy"
-        showShade={false}
-      />
-      {backendEnabled ? (
-        <section className="section-pad container">
-          <ManagedCollection kind="publication" />
-        </section>
-      ) : (
-        <SourceSection path="/the-hkl-time" />
-      )}
+      <EdmontonIntro />
       <JourneyCTA />
     </PageShell>
   );
@@ -513,6 +496,7 @@ export function VolunteerPage() {
         alt="HKL participants connecting with kindness"
       />
       <SourceSection path="/volunteer" formTitle="Become an HKL volunteer" />
+      <EdmontonIntro />
       <JourneyCTA />
     </PageShell>
   );
@@ -561,6 +545,7 @@ export function ContactPage() {
                 </p>
               </div>
             </div>
+            <EdmontonContactDetails />
             <div className="contact-community">
               <Globe2 size={24} strokeWidth={1.2} />
               <h3>Looking for your community?</h3>

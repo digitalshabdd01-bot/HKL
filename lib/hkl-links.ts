@@ -29,6 +29,7 @@ export function localHref(href: string) {
   // This published conference still links to an unavailable speaker profile.
   // Keep the original speaker information reachable at its conference entry.
   if(path.endsWith("/canada-speakers/sam-demma")) return path.replace("/canada-speakers/sam-demma","/abbotsford-canada-2025")+"#sam-demma";
+  if (/^\/(?:es\/|de\/|it\/|pa\/|ru\/|ukra\/)?the-hkl-time(?:\/|$)/.test(path)) return "/edmonton";
   const translated = languages.some(l => l.prefix && path.split("/")[1] === l.prefix);
   if (!translated) {
     if (path === "/join") path = "/practices";

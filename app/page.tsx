@@ -5,6 +5,7 @@ import useSiteSettings from "../components/useSiteSettings";
 import { safeLink } from "../lib/hkl-api";
 import SiteHeader from "../components/SiteHeader";
 import SiteFooter from "../components/SiteFooter";
+import { EdmontonIntro, KindnessCards } from "../components/EdmontonContent";
 import MoreFromHKL from "../components/MoreFromHKL";
 import { originalMission, originalValues } from "../lib/hkl-content";
 import { imageSrc } from "../lib/hkl-links";
@@ -125,13 +126,13 @@ const stories = [
     link: "/practices",
   },
   {
-    category: "The HKL Time",
-    title: "Goodness, from around the world",
-    text: "Meet the people bringing the movement to life in HKL’s fortnightly publication.",
-    image: "community.webp",
-    tag: "THE HKL TIME · ISSUE 18",
-    date: "30 OCT 2026",
-    link: "/the-hkl-time",
+    category: "HKL Edmonton",
+    title: "Kindness in the heart of Edmonton",
+    text: "Discover community walks, water and aid seva, festival service, and friendship across faiths.",
+    image: "edmonton/community-parade.jpeg",
+    tag: "COMMUNITY IN ACTION",
+    date: "EDMONTON · ALBERTA, CANADA",
+    link: "/edmonton",
   },
 ];
 const events = [
@@ -651,7 +652,7 @@ export default function Home() {
               role="tablist"
               aria-label="Inspiration categories"
             >
-              {["Stories & talks", "Weekly practices", "The HKL Time"].map(
+              {["Stories & talks", "Weekly practices", "HKL Edmonton"].map(
                 (f, i) => (
                   <button
                     id={`filter-${i}`}
@@ -672,7 +673,7 @@ export default function Home() {
               }
               id="story-results"
               role="tabpanel"
-              aria-labelledby={`filter-${["Stories & talks", "Weekly practices", "The HKL Time"].indexOf(filter)}`}
+              aria-labelledby={`filter-${["Stories & talks", "Weekly practices", "HKL Edmonton"].indexOf(filter)}`}
             >
               {stories
                 .filter((s) => s.category === filter)
@@ -915,7 +916,7 @@ export default function Home() {
                 },
                 {
                   q: "How can I stay connected?",
-                  a: "Join the HKL community app, receive weekly practices by email, or explore The HKL Time for stories and updates from the global movement.",
+                  a: "Join the HKL community app, receive weekly practices by email, or connect with HKL Edmonton for local gatherings, service, and shared reflection.",
                   link: "/newsletter",
                   label: "Receive weekly practices",
                 },
@@ -976,6 +977,8 @@ export default function Home() {
             </a>
           </div>
         </section>
+        <EdmontonIntro />
+        <KindnessCards />
       </main>
       <SiteFooter />
       <dialog

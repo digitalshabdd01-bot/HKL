@@ -106,7 +106,7 @@ export default function ManagedCollection({
                     ? "BOARD OF DIRECTORS"
                     : "HKL SPEAKER"
                   : kind === "publication"
-                    ? `THE HKL TIME${item.issue_number ? ` · ISSUE ${item.issue_number}` : ""}`
+                    ? `PUBLICATION${item.issue_number ? ` · ISSUE ${item.issue_number}` : ""}`
                     : `${item.event_type === "walk" ? "HKL WALK" : "HKL CONFERENCE"}${item.country ? ` · ${item.country}` : ""}`}
               </span>
               <h3>
