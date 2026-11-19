@@ -6,6 +6,7 @@ import { safeLink } from "../lib/hkl-api";
 import SiteHeader from "../components/SiteHeader";
 import SiteFooter from "../components/SiteFooter";
 import { EdmontonIntro, KindnessCards } from "../components/EdmontonContent";
+import GlobalImpact from "../components/GlobalImpact";
 import MoreFromHKL from "../components/MoreFromHKL";
 import { originalMission, originalValues } from "../lib/hkl-content";
 import { imageSrc } from "../lib/hkl-links";
@@ -421,7 +422,7 @@ export default function Home() {
             </p>
             <i />
             <div className="stat">
-              <strong>116</strong>
+              <strong>117</strong>
               <span>countries & territories</span>
             </div>
             <div className="stat">
@@ -895,6 +896,7 @@ export default function Home() {
             </a>
           </div>
         </section>
+        <GlobalImpact />
         <section className="section-pad">
           <div className="container faq-grid">
             <div>

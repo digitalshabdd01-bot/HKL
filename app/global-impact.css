@@ -1,0 +1,94 @@
+.global-impact {
+  --impact-navy: #030d2d;
+  --flag-gap: 13px;
+  background: var(--impact-navy);
+  color: var(--impact-navy);
+  padding: 48px 0 62px;
+  overflow: hidden;
+}
+.global-impact-stats {
+  width: min(1130px, calc(100% - 80px));
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: repeat(20, minmax(0, 1fr));
+  gap: 18px;
+}
+.global-impact-stat {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 18px;
+  min-width: 0;
+  min-height: 174px;
+  border-radius: 20px;
+  padding: 22px 20px;
+  background: #ffb548;
+  font-family: var(--font-sans, Arial, sans-serif);
+}
+.global-impact-stat strong {
+  color: inherit;
+  font-size: clamp(3.2rem, 5vw, 5rem);
+  font-weight: 650;
+  letter-spacing: -.045em;
+  line-height: 1;
+  white-space: nowrap;
+}
+.global-impact-stat span {
+  font-size: clamp(1.1rem, 1.9vw, 1.65rem);
+  font-weight: 600;
+  line-height: 1.3;
+}
+.global-impact-stat--countries { grid-column: span 7; }
+.global-impact-stat--conferences { grid-column: span 4; }
+.global-impact-stat--impressions { grid-column: span 9; }
+.global-impact-stat--livestream { grid-column: span 14; }
+.global-impact-stat--attendance { grid-column: span 6; }
+.global-impact-flags { max-width: 1500px; margin: 16px auto 0; }
+.global-impact-controls { display: flex; justify-content: flex-end; padding: 0 24px 14px; }
+.global-impact-controls button {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: transparent; border: 1px solid #56617c; border-radius: 20px;
+  color: #fff; padding: 6px 12px; cursor: pointer; font-size: .875rem; line-height: 1.3;
+}
+.global-impact-controls button:focus-visible { outline: 2px solid #ffb548; outline-offset: 4px; }
+.global-impact-flag-row {
+  overflow: hidden;
+  margin-top: 36px;
+  mask-image: linear-gradient(to right, transparent, #000 5%, #000 95%, transparent);
+}
+.global-impact-controls + .global-impact-flag-row { margin-top: 0; }
+.global-impact-flag-track {
+  display: flex;
+  width: max-content;
+  animation: hkl-flags-travel 95s linear infinite;
+}
+.global-impact-flag-row--right .global-impact-flag-track { animation-direction: reverse; }
+.global-impact-flag-row--left .global-impact-flag-track { animation-duration: 105s; }
+.global-impact-flag-group { display: flex; flex: none; gap: var(--flag-gap); padding-right: var(--flag-gap); }
+.global-impact-flag-group img { display: block; flex: none; width: 80px; height: 60px; object-fit: fill; }
+.global-impact-flags[data-paused="true"] .global-impact-flag-track,
+.global-impact-flag-row:hover .global-impact-flag-track { animation-play-state: paused; }
+@keyframes hkl-flags-travel { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@media (max-width: 900px) {
+  .global-impact-stats { width: calc(100% - 48px); gap: 14px; }
+  .global-impact-stat { padding: 20px 16px; min-height: 150px; border-radius: 16px; }
+  .global-impact-stat strong { font-size: clamp(2.6rem, 6vw, 4rem); }
+  .global-impact-stat span { font-size: 1.1rem; }
+}
+@media (max-width: 600px) {
+  .global-impact { --flag-gap: 11px; padding: 32px 0 38px; }
+  .global-impact-stats { width: calc(100% - 32px); grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .global-impact-stat { min-height: 132px; padding: 18px 14px; gap: 14px; }
+  .global-impact-stat strong { font-size: clamp(2.7rem, 10vw, 3.4rem); }
+  .global-impact-stat span { font-size: 1rem; }
+  .global-impact-stat--countries, .global-impact-stat--conferences { grid-column: span 1; }
+  .global-impact-stat--impressions, .global-impact-stat--livestream, .global-impact-stat--attendance { grid-column: span 2; }
+  .global-impact-stat--impressions, .global-impact-stat--attendance { min-height: 125px; }
+  .global-impact-flag-group img { width: 64px; height: 48px; }
+  .global-impact-flag-row { margin-top: 26px; }
+  .global-impact-flags { margin-top: 20px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .global-impact-flag-track { animation: none; }
+  .global-impact-controls { display: none; }
+}
