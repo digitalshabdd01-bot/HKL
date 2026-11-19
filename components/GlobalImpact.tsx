@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Pause, Play } from "lucide-react";
+import { Globe2, Pause, Play } from "lucide-react";
 import flags from "../content/hkl-flags.json";
 
 const statistics = [
@@ -17,14 +17,25 @@ export default function GlobalImpact() {
   const [paused, setPaused] = useState(false);
   return (
     <section className="global-impact" id="global-impact" aria-labelledby="global-impact-title">
-      <h2 className="sr-only" id="global-impact-title">Humility, Kindness & Love around the world</h2>
-      <div className="global-impact-stats">
-        {statistics.map(stat => <div className={`global-impact-stat global-impact-stat--${stat.id}`} key={stat.id}>
-          <strong>{stat.value}</strong><span>{stat.label}</span>
-        </div>)}
+      <div className="global-impact-inner">
+        <header className="global-impact-heading">
+          <div><span className="global-impact-eyebrow">HKL ACROSS THE WORLD</span><h2 id="global-impact-title">A shared intention.<br/><em>A world of connection.</em></h2></div>
+          <p>Across borders and backgrounds, Humility, Kindness & Love bring us closer to one another.</p>
+        </header>
+        <div className="global-impact-stats">
+          <div className="global-impact-stat global-impact-stat--countries">
+            <Globe2 size={30} strokeWidth={1.2} aria-hidden="true"/>
+            <strong>{statistics[0].value}</strong><span>{statistics[0].label}</span>
+          </div>
+          <div className="global-impact-details">
+            {statistics.slice(1).map(stat => <div className={`global-impact-stat global-impact-stat--${stat.id}`} key={stat.id}>
+              <strong>{stat.value}</strong><span>{stat.label}</span>
+            </div>)}
+          </div>
+        </div>
       </div>
       <div className="global-impact-flags" data-paused={paused}>
-        <div className="global-impact-controls"><button type="button" aria-pressed={paused} onClick={() => setPaused(value => !value)}>
+        <div className="global-impact-controls"><p>Many cultures. One human family.</p><button type="button" aria-pressed={paused} onClick={() => setPaused(value => !value)}>
           {paused ? <Play size={14} aria-hidden="true"/> : <Pause size={14} aria-hidden="true"/>}
           {paused ? "Resume flags" : "Pause flags"}
         </button></div>
