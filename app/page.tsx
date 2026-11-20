@@ -19,8 +19,6 @@ import {
   X,
   Play,
   Pause,
-  Leaf,
-  Heart,
   Globe2,
   MapPin,
   Clock3,
@@ -44,32 +42,25 @@ const virtues = [
     name: "Humility",
     line: "A little less ego. A little more openness.",
     text: originalValues.Humility,
-    prompt: "Today, let someone else be heard before offering your own view.",
-
-    image: "home/Ego and Openness at Sunset.webp",
-    alt: "An HKL participant listening with hands together",
-    icon: Sprout,
+    image: "foundation/humility.webp",
+    imageHeight: 1250,
+    alt: "A woman listening attentively to another person in a conversation",
   },
   {
     name: "Kindness",
     line: "Small gestures. Beautiful ripples.",
     text: originalValues.Kindness,
-    prompt:
-      "Today, offer one thoughtful act without expecting anything in return.",
-    image: "home/Small Gestures, Beautiful Ripples.webp",
-    alt: "HKL participants greeting each other with respect",
-    icon: Leaf,
+    image: "foundation/kindness.webp",
+    imageHeight: 1125,
+    alt: "A woman offering an older man a warm scarf with a smile",
   },
   {
     name: "Love",
     line: "Beyond our differences, a shared humanity.",
     text: originalValues.Love,
-    prompt:
-      "Today, bring patience and understanding to a difficult conversation.",
-    
-    image: "home/Hands United at Sunrise.webp",
-    alt: "An HKL attendee reflecting with her eyes closed",
-    icon: Heart,
+    image: "foundation/love.webp",
+    imageHeight: 1191,
+    alt: "Friends of different generations sharing a joyful moment beneath a tree",
   },
 ];
 const stories = [
@@ -225,8 +216,7 @@ export default function Home() {
         ...photos.slice(1),
       ]
     : photos;
-  const [activeVirtue, setActiveVirtue] = useState(0),
-    [photo, setPhoto] = useState(0),
+  const [photo, setPhoto] = useState(0),
     [filter, setFilter] = useState("Stories & talks"),
     [location, setLocation] = useState("All locations"),
     [modal, setModal] = useState<Modal>(null),
@@ -291,14 +281,12 @@ export default function Home() {
     setRunning(false);
     setModal({ type: "reflection" });
   }
-  const value = virtues[activeVirtue],
-    ValueIcon = value.icon;
   return (
     <>
       <a className="skip-link" href="#main">
         Skip to content
       </a>
-      <SiteHeader onSelectVirtue={setActiveVirtue} />
+      <SiteHeader />
       <span id="top" />
       <main id="main">
         <section
@@ -479,67 +467,34 @@ export default function Home() {
           </div>
         </section>
         <JourneyRoadmap />
-        <section id="values" className="values section-pad">
+        <section id="values" className="values section-pad foundation-section" aria-labelledby="foundation-title">
           <div className="container">
-            <div className="section-heading">
-              <div>
-                <span className="eyebrow">OUR SHARED FOUNDATION</span>
-                <h2>
-                  Simple values.
-                  <br />
-                  <em>Profound possibilities.</em>
-                </h2>
-              </div>
+            <div className="foundation-intro">
+              <span className="eyebrow">OUR SHARED FOUNDATION</span>
+              <h2 id="foundation-title">
+                Simple values.<br /><em>Profound possibilities.</em>
+              </h2>
               <p>
-                These qualities are already part of who we are.
-                <br />
-                The journey is learning to live them.
+                Humility, Kindness &amp; Love are already part of who we are.
+                By reconnecting with them, we make room for greater happiness,
+                connection, and lasting contentment.
               </p>
+              <p className="foundation-belief">A more beautiful world begins <strong>within each of us.</strong></p>
             </div>
-            <div className="virtue-layout">
-              <div
-                className="virtue-tabs"
-                role="tablist"
-                aria-label="HKL values"
-              >
-                {virtues.map((v, i) => (
-                  <button
-                    key={v.name}
-                    id={`value-tab-${i}`}
-                    role="tab"
-                    aria-selected={activeVirtue === i}
-                    aria-controls="value-panel"
-                    className={activeVirtue === i ? "selected" : ""}
-                    onClick={() => setActiveVirtue(i)}
-                  >
-                    <small>0{i + 1}</small>
-                    <span>{v.name}</span>
-                    <ArrowUpRight size={23} />
-                  </button>
-                ))}
-              </div>
-              <div
-                className="virtue-panel"
-                id="value-panel"
-                role="tabpanel"
-                aria-labelledby={`value-tab-${activeVirtue}`}
-                key={activeVirtue}
-              >
-                <img
-                  src={imageSrc(value.image)}
-                  alt={value.alt}
-                  loading="lazy"
-                />
-                <div className="virtue-copy">
-                  <ValueIcon size={28} strokeWidth={1.2} />
-                  <h3>{value.line}</h3>
-                  <p>{value.text}</p>
-                  <div className="try-today">
-                    <span>AN INVITATION FOR TODAY</span>
-                    <p>{value.prompt}</p>
+            <div className="foundation-grid">
+              {virtues.map((value) => (
+                <article className="foundation-card" key={value.name} aria-labelledby={`foundation-${value.name.toLowerCase()}`}>
+                  <div className="foundation-photo">
+                    <img src={imageSrc(value.image)} alt={value.alt} loading="lazy" width={900} height={value.imageHeight} />
                   </div>
-                </div>
-              </div>
+                  <div className="foundation-copy">
+                    <h3 id={`foundation-${value.name.toLowerCase()}`}>{value.name}</h3>
+                    <p className="foundation-line">{value.line}</p>
+                    <p className="foundation-description">{value.text}</p>
+                    <a className="foundation-link" href={`/values#${value.name.toLowerCase()}`} aria-label={`Read more about ${value.name.toLowerCase()}`}>Read more</a>
+                  </div>
+                </article>
+              ))}
             </div>
           </div>
         </section>
