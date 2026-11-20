@@ -1,15 +1,12 @@
 .journey-roadmap { padding: 88px 0 80px; background: var(--paper, #fffdf8); border-block: 1px solid #dce2d3; }
-.journey-roadmap-intro { text-align: center; max-width: 760px; margin: 0 auto 55px; }
+.journey-roadmap-intro { text-align: center; max-width: 760px; margin: 0 auto 40px; }
 .journey-roadmap-eyebrow { display: block; font: 500 .75rem/1.6 var(--sans); letter-spacing: .16em; color: #607a54; margin-bottom: 15px; }
 .journey-roadmap-intro h2 { font-size: clamp(2.2rem, 4.2vw, 3.5rem); color: var(--green); }
 .journey-roadmap h2 em, .journey-roadmap h3 em { color: #8e624a; }
 .journey-roadmap-reflection { min-height: 2.8em; display: flex; justify-content: center; align-items: center; margin: 16px 0 4px; font: 400 clamp(1.35rem, 2.7vw, 2rem)/1.35 var(--serif); color: #8e624a; }
 .journey-roadmap-cursor { display: inline-block; margin-left: 4px; font-weight: 400; animation: journey-cursor-blink 1s steps(1) infinite; }
-.journey-roadmap-cursor.is-paused { animation: none; }
 .journey-roadmap-lead { color: #65705f; font-size: 1rem; line-height: 1.8; }
-.journey-roadmap-toggle { display: inline-flex; align-items: center; justify-content: center; gap: 7px; color: #617459; font-size: .8rem; padding: 8px 12px; margin-top: 14px; border-radius: 4px; }
-.journey-roadmap-toggle:hover { background: #edf1e6; }
-.journey-roadmap-path { --journey-progress: 0; position: relative; display: grid; gap: 86px; list-style: none; margin: 0; padding: 16px 0 0; }
+.journey-roadmap-path { --journey-progress: 0; position: relative; display: grid; gap: 86px; list-style: none; margin: 0; padding: 88px 0 0; }
 .journey-roadmap-path::before, .journey-roadmap-path::after { content: ""; position: absolute; top: 0; bottom: 80px; left: calc(50% - 1px); width: 2px; pointer-events: none; }
 .journey-roadmap-path::before { background: #dbe3d2; }
 .journey-roadmap-path::after { background: #78945f; transform: scaleY(var(--journey-progress)); transform-origin: top; }
@@ -32,7 +29,7 @@
   .journey-roadmap .container { padding-inline: 22px; }
   .journey-roadmap-intro { margin-bottom: 40px; }
   .journey-roadmap-reflection { font-size: 1.4rem; min-height: 3.2em; }
-  .journey-roadmap-path { gap: 64px; }
+  .journey-roadmap-path { gap: 64px; padding-top: 72px; }
   .journey-roadmap-step { padding: 25px 5px 8px; }
   .journey-roadmap-step h3 { font-size: 1.9rem; }
   .journey-roadmap-step > p { margin-top: 16px; }

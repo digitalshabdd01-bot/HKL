@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Heart, Pause, Play, Sprout, HandHeart } from "lucide-react";
+import { Heart, Sprout, HandHeart } from "lucide-react";
 
 const reflections = [
   "Peace can feel far away.",
@@ -16,7 +16,6 @@ const virtues = [
 
 export default function JourneyRoadmap() {
   const [typed, setTyped] = useState(reflections[0]);
-  const [paused, setPaused] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
   const typing = useRef({ phrase: 0, count: 0, deleting: false });
   const path = useRef<HTMLOListElement>(null);
@@ -31,7 +30,6 @@ export default function JourneyRoadmap() {
 
   useEffect(() => {
     if (reducedMotion) { setTyped(reflections[0]); return; }
-    if (paused) return;
     let timer: ReturnType<typeof setTimeout>;
     const tick = () => {
       const state = typing.current;
@@ -51,7 +49,7 @@ export default function JourneyRoadmap() {
     };
     timer = setTimeout(tick, 100);
     return () => clearTimeout(timer);
-  }, [paused, reducedMotion]);
+  }, [reducedMotion]);
 
   useEffect(() => {
     const element = path.current;
@@ -83,20 +81,10 @@ export default function JourneyRoadmap() {
       <header className="journey-roadmap-intro">
         <span className="journey-roadmap-eyebrow">YOUR HKL JOURNEY</span>
         <h2 id="journey-roadmap-title">A path back to <em>yourself.</em></h2>
-        <p className="journey-roadmap-reflection" aria-hidden="true"><span>{typed}</span><span className={`journey-roadmap-cursor ${paused ? "is-paused" : ""}`}>|</span></p>
+        <p className="journey-roadmap-reflection" aria-hidden="true"><span>{typed}</span><span className="journey-roadmap-cursor">|</span></p>
         <p className="sr-only">Peace can feel far away. Make a moment to pause, look within, and reconnect with Humility, Kindness & Love.</p>
         <p className="journey-roadmap-lead">The next step does not have to be a big one.<br/>It can begin with a little space to listen.</p>
-        {!reducedMotion && <button className="journey-roadmap-toggle" type="button" aria-pressed={paused} onClick={() => {
-          if (!paused) {
-            const state = typing.current;
-            state.count = reflections[state.phrase].length;
-            state.deleting = true;
-            setTyped(reflections[state.phrase]);
-          }
-          setPaused(value => !value);
-        }}>
-          {paused ? <Play size={13} aria-hidden="true"/> : <Pause size={13} aria-hidden="true"/>}{paused ? "Resume changing text" : "Pause changing text"}
-        </button>}
+
       </header>
       <ol className="journey-roadmap-path" ref={path}>
         <li className="journey-roadmap-step">
