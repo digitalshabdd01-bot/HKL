@@ -5,11 +5,11 @@ import { Globe2, Pause, Play } from "lucide-react";
 import flags from "../content/hkl-flags.json";
 
 const statistics = [
-  { id: "countries", value: "117", label: "countries and territories" },
-  { id: "conferences", value: "7", label: "conferences" },
-  { id: "impressions", value: "34 Mil", label: "30-day social media impressions" },
+  { id: "countries", value: "75", label: "countries and territories" },
+  { id: "conferences", value: "6", label: "international conferences" },
+  { id: "impressions", value: "3M+", label: "social media impressions" },
   { id: "livestream", value: "1,000,000 +", label: "livestream views over 6 conferences" },
-  { id: "attendance", value: "23 K", label: "in-person attendees" },
+  { id: "attendance", value: "50K+", label: "in-person attendees" },
 ];
 const rows = [0, 1, 2].map(row => flags.slice(Math.ceil(flags.length * row / 3), Math.ceil(flags.length * (row + 1) / 3)));
 

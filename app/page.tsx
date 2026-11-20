@@ -422,11 +422,11 @@ export default function Home() {
             </p>
             <i />
             <div className="stat">
-              <strong>117</strong>
+              <strong>75</strong>
               <span>countries & territories</span>
             </div>
             <div className="stat">
-              <strong>23,000+</strong>
+              <strong>50,000+</strong>
               <span>in-person participants</span>
             </div>
             <a href="#community">
