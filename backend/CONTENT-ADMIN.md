@@ -8,6 +8,7 @@ Deploy the backend first so its migration and API fields are available before de
 
 ## Editing
 
+* Content → Notice / update: add a title, summary, optional body and related resource URL. Set `publish_at` and enable `published`. The homepage notice board combines due notices and events, sorts them newest first by publication date, and adds a red NEW tag for the first five entries published within the last 30 days. Older entries remain below and can be expanded with “Show older updates”. Notice details open at `/content/notice/SLUG`. Run migration `0004_alter_content_kind` when upgrading. With no backend configured, the board uses `content/hkl-notices.json`; a configured empty or unavailable API never displays those fallback announcements.
 * Content → Event: set `event_type` to conference or walk, location/country, start/end (UTC), registration URL and any speaker assignments. Ongoing events remain in upcoming lists until their end time. Events with no end time are classified by their start time. Published events require a start time.
 * Content → Publication: set issue number, title, summary, cover URL and `resource_url` to the PDF/reader. Website visitors open reading links externally; no arbitrary iframe HTML is accepted.
 * Content → Speaker: set `profile_role` to speaker or board director, biography in plain text and portrait URL. Only published, due speaker records are exposed on event pages.

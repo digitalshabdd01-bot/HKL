@@ -7,7 +7,7 @@ type Props = { params: Promise<{ kind: string; slug: string }> };
 async function record(params: Props["params"]) {
   const { kind, slug } = await params;
   if (kind === "publication") permanentRedirect("/edmonton");
-  if (!backendEnabled || !["event", "speaker"].includes(kind)) notFound();
+  if (!backendEnabled || !["event", "speaker", "notice"].includes(kind)) notFound();
   const items = await fetchContent(kind as ContentKind, AbortSignal.timeout(15000), { slug });
   if (!items[0]) notFound();
   return items[0];
@@ -18,10 +18,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 export default async function ManagedDetail({ params }: Props) {
   const item = await record(params);
-  const back = item.kind === "speaker" ? "/speakers" : item.event_type === "walk" ? "/walks" : "/gatherings";
+  const back = item.kind === "notice" ? "/#notice-board" : item.kind === "speaker" ? "/speakers" : item.event_type === "walk" ? "/walks" : "/gatherings";
   const registration = safeLink(item.registration_url);
   const resource = safeLink(item.resource_url);
-  return <PageShell><article className="container source-reading section-pad"><a className="text-link" href={back}>← Back to {item.kind === "speaker" ? "people" : "gatherings"}</a>
+  return <PageShell><article className="container source-reading section-pad"><a className="text-link" href={back}>Back to {item.kind === "notice" ? "notice board" : item.kind === "speaker" ? "people" : "gatherings"}</a>
     <h1>{item.title}</h1><p className="source-lead">{item.summary}</p>
     {safeLink(item.image_url) && <img src={item.image_url} alt={item.title} style={{ maxWidth: "100%", maxHeight: 520, objectFit: "contain" }}/>}
     {item.starts_at && <p><time dateTime={item.starts_at}>{new Date(item.starts_at).toLocaleString("en-US", { dateStyle: "full", timeStyle: "short", timeZone: "UTC" })} UTC</time>{item.ends_at && <> – <time dateTime={item.ends_at}>{new Date(item.ends_at).toLocaleString("en-US", { dateStyle: "full", timeStyle: "short", timeZone: "UTC" })} UTC</time></>}</p>}

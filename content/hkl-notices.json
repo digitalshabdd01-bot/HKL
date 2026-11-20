@@ -1,0 +1,58 @@
+[
+  {
+    "id": "notice-board-launch",
+    "title": "A new space to stay connected",
+    "summary": "Find the latest HKL announcements, gatherings, and weekly practices here on our notice board.",
+    "date": "2026-11-20T00:00:00Z",
+    "category": "Website update",
+    "href": "/resources"
+  },
+  {
+    "id": "punjab-2026",
+    "title": "HKL gathering in Bulandpuri, Punjab",
+    "summary": "Explore the 15–17 November gathering and the shared journey of Humility, Kindness & Love.",
+    "date": "2026-11-15T00:00:00Z",
+    "category": "Gathering",
+    "href": "/punjab-india-2026"
+  },
+  {
+    "id": "practice-oct-20",
+    "title": "Weekly practice: Beg the Divine for His Grace",
+    "summary": "Make space for a moment of reflection with this practice from the HKL library.",
+    "date": "2026-10-20T00:00:00Z",
+    "category": "Weekly practice",
+    "href": "/practices/oct-20-2026"
+  },
+  {
+    "id": "practice-oct-10",
+    "title": "Weekly practice: Me and God are one",
+    "summary": "A reflection on connection, the soul, and the presence of the Divine within.",
+    "date": "2026-10-10T00:00:00Z",
+    "category": "Weekly practice",
+    "href": "/practices/oct-10-2026"
+  },
+  {
+    "id": "story-path-of-love",
+    "title": "The Story of Our Lives: The Path of Love",
+    "summary": "Watch and reflect on an invitation to turn inward and rediscover a natural way of living.",
+    "date": "2026-10-04T00:00:00Z",
+    "category": "Story & talk",
+    "href": "/stories/the-path-of-love"
+  },
+  {
+    "id": "practice-sep-30",
+    "title": "Weekly practice: I am peacefulness",
+    "summary": "Return to the qualities within through a gentle practice of awareness.",
+    "date": "2026-09-30T00:00:00Z",
+    "category": "Weekly practice",
+    "href": "/practices/sep-30-2026"
+  },
+  {
+    "id": "story-courage",
+    "title": "The Epitome of Human Courage",
+    "summary": "A conversation about finding the courage to reconnect with our true selves.",
+    "date": "2026-09-18T00:00:00Z",
+    "category": "Story & talk",
+    "href": "/stories/the-epitome-of-human-courage"
+  }
+]

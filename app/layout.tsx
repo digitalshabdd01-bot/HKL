@@ -9,6 +9,7 @@ import "./edmonton.css";
 import "./global-impact.css";
 import "./journey-roadmap.css";
 import "./foundation.css";
+import "./notice-board.css";
 
 export const metadata: Metadata = {
   title: "HKL — A more beautiful world begins within",

@@ -10,6 +10,7 @@ class Content(models.Model):
         PUBLICATION = "publication", "HKL Time issue"
         SPEAKER = "speaker", "Speaker / director"
         PAGE = "page", "Website page"
+        NOTICE = "notice", "Notice / update"
     kind = models.CharField(max_length=20, choices=Kind.choices)
     slug = models.SlugField(max_length=220)
     language = models.CharField(max_length=15, default="en")

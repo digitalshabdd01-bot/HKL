@@ -8,6 +8,7 @@ import SiteFooter from "../components/SiteFooter";
 import { EdmontonIntro, KindnessCards } from "../components/EdmontonContent";
 import JourneyRoadmap from "../components/JourneyRoadmap";
 import GlobalImpact from "../components/GlobalImpact";
+import NoticeBoard from "../components/NoticeBoard";
 import MoreFromHKL from "../components/MoreFromHKL";
 import { originalMission, originalValues } from "../lib/hkl-content";
 import { imageSrc } from "../lib/hkl-links";
@@ -423,6 +424,7 @@ export default function Home() {
             </a>
           </div>
         </div>
+        <NoticeBoard />
         <section id="about" className="section-pad">
           <div className="container about-grid">
             <div className="about-photos">

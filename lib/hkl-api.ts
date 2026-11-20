@@ -16,7 +16,7 @@ const recordSchema = z.object({
 });
 const pageSchema = z.object({ results: z.array(recordSchema), next: z.string().nullable() });
 export type CmsContent = z.infer<typeof recordSchema>;
-export type ContentKind = "practice" | "talk" | "event" | "publication" | "speaker" | "page";
+export type ContentKind = "practice" | "talk" | "event" | "publication" | "speaker" | "page" | "notice";
 
 export function safeLink(value: string) {
   try { const url = new URL(value); return ["https:", "http:"].includes(url.protocol) ? url.href : undefined; }

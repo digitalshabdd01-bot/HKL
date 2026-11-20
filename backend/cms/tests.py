@@ -27,6 +27,17 @@ class BackendTests(TestCase):
         self.assertEqual(self.api.post("/api/v1/content/", {"title": "Attack"}).status_code, 405)
         self.assertEqual(self.api.delete(f"/api/v1/content/{self.live.id}/").status_code, 405)
 
+    def test_notices_respect_publishing_and_have_admin_kind(self):
+        live = Content.objects.create(kind=Content.Kind.NOTICE, slug="notice-live", title="Live notice", published=True)
+        draft = Content.objects.create(kind=Content.Kind.NOTICE, slug="notice-draft", title="Draft notice")
+        scheduled = Content.objects.create(kind=Content.Kind.NOTICE, slug="notice-scheduled", title="Scheduled notice", published=True, publish_at=timezone.now() + timedelta(days=1))
+        response = self.api.get("/api/v1/content/?kind=notice")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual([item["id"] for item in response.json()["results"]], [live.id])
+        for hidden in [draft, scheduled]:
+            self.assertEqual(self.api.get(f"/api/v1/content/{hidden.id}/").status_code, 404)
+        self.assertIn(("notice", "Notice / update"), Content.Kind.choices)
+
     def test_search_and_language(self):
         Content.objects.create(kind="practice", slug="live", language="es", title="Práctica", published=True)
         self.assertEqual(self.api.get("/api/v1/content/?language=es").json()["count"], 1)
