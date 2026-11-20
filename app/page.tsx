@@ -6,6 +6,7 @@ import { safeLink } from "../lib/hkl-api";
 import SiteHeader from "../components/SiteHeader";
 import SiteFooter from "../components/SiteFooter";
 import { EdmontonIntro, KindnessCards } from "../components/EdmontonContent";
+import JourneyRoadmap from "../components/JourneyRoadmap";
 import GlobalImpact from "../components/GlobalImpact";
 import MoreFromHKL from "../components/MoreFromHKL";
 import { originalMission, originalValues } from "../lib/hkl-content";
@@ -477,6 +478,7 @@ export default function Home() {
             </div>
           </div>
         </section>
+        <JourneyRoadmap />
         <section id="values" className="values section-pad">
           <div className="container">
             <div className="section-heading">
