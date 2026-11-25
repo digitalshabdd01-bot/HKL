@@ -424,7 +424,6 @@ export default function Home() {
             </a>
           </div>
         </div>
-        <NoticeBoard />
         <section id="about" className="section-pad">
           <div className="container about-grid">
             <div className="about-photos">
@@ -915,6 +914,7 @@ export default function Home() {
             </div>
           </div>
         </section>
+        <NoticeBoard />
         <MoreFromHKL />
         <section className="newsletter">
           <div className="container newsletter-inner">

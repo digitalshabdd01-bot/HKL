@@ -59,8 +59,8 @@ export default function NoticeBoard() {
       <div className="container notice-board-layout">
         <div className="notice-board-intro">
           <span className="eyebrow">NOTICE BOARD</span>
-          <h2 id="notice-board-title">Stay close to<br /><em>what’s happening.</em></h2>
-          <p>News, gatherings, and small invitations to stay connected with the HKL community.</p>
+          <h2 id="notice-board-title">Latest from <em>HKL.</em></h2>
+          <p>Announcements, gatherings, and weekly practices.</p>
           <a className="notice-directory-link" href="/gatherings">Explore our gatherings</a>
         </div>
         <div className="notice-board-panel" aria-busy={loading}>
@@ -86,7 +86,6 @@ export default function NoticeBoard() {
                       {now !== null && index < 5 && isNewNotice(notice, now) && <span className="notice-new">NEW</span>}
                     </div>
                     <h4>{notice.title}</h4>
-                    <p>{notice.summary}</p>
                   </a>
                 </li>
               ))}
